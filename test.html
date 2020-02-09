@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Zoomtastic Test</title>
+	</head>
+
+	<body>
+		<img width="500" zoomtastic src="https://cdn.dribbble.com/users/577645/screenshots/9874395/media/0e1f2a73119dca62f7dbea0c52fa384c.png" />
+
+		<script src="./dist/zoomtastic.umd.js"></script>
+		<script>
+			new Zoomtastic({ preload: true, onShow: () => console.log('shown'), onHide: () => console.log('hidden') }).listen('[zoomtastic]');
+		</script>
+	</body>
+</html>
