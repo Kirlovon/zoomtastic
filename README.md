@@ -1,2 +1,3 @@
 # Zoomtastic
- Tiny image zoomer for web!
+
+Tiny image zoomer for web!
