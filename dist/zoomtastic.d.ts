@@ -4,6 +4,8 @@ interface ZoomtasticConfig {
     preload?: boolean;
     duration?: number;
     delay?: number;
+    zoomInCursor?: string;
+    zoomOutCursor?: string;
     background?: string;
     easing?: string;
     zIndex?: string | number;
@@ -20,8 +22,6 @@ interface ZoomtasticConfig {
 }
 /** Zoomtastic - Tiny image zoomer for web! */
 declare class Zoomtastic {
-    private delayTimer;
-    private durationTimer;
     private config;
     /**
      * Setup zoomtastic

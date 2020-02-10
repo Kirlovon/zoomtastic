@@ -6,6 +6,8 @@ interface ZoomtasticConfig {
 	preload?: boolean;
 	duration?: number;
 	delay?: number;
+	zoomInCursor?: string;
+	zoomOutCursor?: string;
 	background?: string;
 	easing?: string;
 	zIndex?: string | number;
@@ -23,13 +25,12 @@ interface ZoomtasticConfig {
 
 /** Zoomtastic - Tiny image zoomer for web! */
 class Zoomtastic {
-	private delayTimer: NodeJS.Timeout;
-	private durationTimer: NodeJS.Timeout;
-
 	private config: ZoomtasticConfig = {
 		preload: true,
 		duration: 150,
 		delay: 200,
+		zoomInCursor: 'zoom-in',
+		zoomOutCursor: 'zoom-out',
 		background: 'rgba(0, 0, 0, 0.75)',
 		easing: 'ease-out',
 		zIndex: '16777271',
@@ -55,6 +56,8 @@ class Zoomtastic {
 			if (typeof this.config.preload !== 'boolean') throw new TypeError('Field "preload" must be a boolean');
 			if (typeof this.config.duration !== 'number') throw new TypeError('Field "duration" must be a number');
 			if (typeof this.config.delay !== 'number') throw new TypeError('Field "delay" must be a number');
+			if (typeof this.config.zoomInCursor !== 'string') throw new TypeError('Field "zoomInCursor" must be a string');
+			if (typeof this.config.zoomOutCursor !== 'string') throw new TypeError('Field "zoomOutCursor" must be a string');
 			if (typeof this.config.background !== 'string') throw new TypeError('Field "background" must be a string');
 			if (typeof this.config.easing !== 'string') throw new TypeError('Field "easing" must be a string');
 			if (typeof this.config.top !== 'string') throw new TypeError('Field "top" must be a string');
@@ -81,10 +84,10 @@ class Zoomtastic {
 		container.style.left = '0';
 		container.style.width = '100%';
 		container.style.height = '100vh';
-		container.style.cursor = 'zoom-out';
 		container.style.opacity = '0';
 		container.style.position = 'fixed';
 		container.style.overflow = 'hidden';
+		container.style.cursor = this.config.zoomOutCursor;
 		container.style.zIndex = String(this.config.zIndex);
 		container.style.backgroundColor = this.config.background;
 		container.style.transitionProperty = 'all';
@@ -110,6 +113,7 @@ class Zoomtastic {
 		image.style.transitionProperty = 'all';
 		image.style.transitionDuration = this.config.duration + 'ms';
 		image.style.transitionTimingFunction = this.config.easing;
+		image.style.filter = 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.5))';
 
 		container.addEventListener('click', () => this.hide());
 
@@ -126,7 +130,7 @@ class Zoomtastic {
 
 		// Add event listener to each found element
 		elements.forEach((item: HTMLElement) => {
-			item.style.cursor = 'zoom-in';
+			item.style.cursor = this.config.zoomInCursor;
 
 			item.addEventListener('click', (event: MouseEvent) => {
 				event.preventDefault();
@@ -145,8 +149,8 @@ class Zoomtastic {
 	public show(url: string): void {
 		let ready: boolean = !this.config.preload;
 
-		const container = document.getElementById('zoomtastic-container');
-		const image = document.getElementById('zoomtastic-image');
+		const container: HTMLElement = document.getElementById('zoomtastic-container');
+		const image: HTMLElement = document.getElementById('zoomtastic-image');
 
 		// Show container
 		container.style.display = 'block';
@@ -154,7 +158,7 @@ class Zoomtastic {
 
 		// Preload image
 		if (this.config.preload) {
-			const preloadedImage = new Image();
+			const preloadedImage: HTMLImageElement = new Image();
 			preloadedImage.onload = () => {
 				ready = true;
 				if (typeof this.config.onShow === 'function') this.config.onShow();
@@ -166,7 +170,7 @@ class Zoomtastic {
 
 		// Show image
 		setTimeout(() => {
-			const loading = setInterval(() => {
+			const loading: NodeJS.Timeout = setInterval(() => {
 				if (ready) {
 					image.style.backgroundImage = `url("${url}")`;
 					image.style.opacity = '1';
@@ -184,8 +188,8 @@ class Zoomtastic {
 	 * Hide zoomed image
 	 */
 	public hide(): void {
-		const container = document.getElementById('zoomtastic-container');
-		const image = document.getElementById('zoomtastic-image');
+		const container: HTMLElement = document.getElementById('zoomtastic-container');
+		const image: HTMLElement = document.getElementById('zoomtastic-image');
 
 		// Event call
 		if (typeof this.config.onHide === 'function') this.config.onHide();
