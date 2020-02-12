@@ -36,7 +36,7 @@ declare class Zoomtastic {
      * Listen elements for automatic image zooming
      * @param selector Elements selector
      */
-    listen(selector: string): void;
+    listen(selector?: string): void;
     /**
      * Show image
      * @param url Image url

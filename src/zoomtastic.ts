@@ -125,8 +125,8 @@ class Zoomtastic {
 	 * Listen elements for automatic image zooming
 	 * @param selector Elements selector
 	 */
-	public listen(selector: string): void {
-		const elements: NodeListOf<Element> = document.querySelectorAll('[zoomtastic]');
+	public listen(selector: string = '[zoomtastic]'): void {
+		const elements: NodeListOf<Element> = document.querySelectorAll(selector);
 
 		// Add event listener to each found element
 		elements.forEach((item: HTMLElement) => {
@@ -136,7 +136,7 @@ class Zoomtastic {
 				event.preventDefault();
 
 				// Get image url from attributes
-				let url: string = item.getAttribute('zoomtastic') || item.getAttribute('src');
+				let url: string = item.getAttribute('zoomtastic') || item.getAttribute('src') || item.getAttribute('lowsrc');
 				if (url) this.show(url);
 			});
 		});
@@ -156,6 +156,9 @@ class Zoomtastic {
 		container.style.display = 'block';
 		setTimeout(() => (container.style.opacity = '1'), 0);
 
+		// Apply image
+		image.style.backgroundImage = `url("${encodeURI(url)}")`;
+
 		// Preload image
 		if (this.config.preload) {
 			const preloadedImage: HTMLImageElement = new Image();
@@ -172,7 +175,6 @@ class Zoomtastic {
 		setTimeout(() => {
 			const loading: NodeJS.Timeout = setInterval(() => {
 				if (ready) {
-					image.style.backgroundImage = `url("${url}")`;
 					image.style.opacity = '1';
 					image.style.top = String(this.config.top);
 					image.style.left = String(this.config.left);
