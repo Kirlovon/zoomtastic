@@ -1,0 +1,1 @@
+new Zoomtastic().listen('[zoomtastic]');
