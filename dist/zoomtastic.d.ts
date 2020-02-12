@@ -13,15 +13,23 @@ interface ZoomtasticConfig {
     left?: string | number;
     width?: string | number;
     height?: string | number;
+    filter?: string;
     baseTop?: string | number;
     baseLeft?: string | number;
     baseWidth?: string | number;
     baseHeight?: string | number;
+    baseFilter?: string;
     onShow?: () => void;
     onHide?: () => void;
 }
 /** Zoomtastic - Tiny image zoomer for web! */
 declare class Zoomtastic {
+    private state;
+    /** Timers ( Like setTimeout and setInterval ) */
+    private delayTimer;
+    private loadingTimer;
+    private durationTimer;
+    /** Default config */
     private config;
     /**
      * Setup zoomtastic
@@ -32,6 +40,8 @@ declare class Zoomtastic {
      * Initialize viewer element
      */
     private mount;
+    /** Clear timers */
+    private clearTimers;
     /**
      * Listen elements for automatic image zooming
      * @param selector Elements selector

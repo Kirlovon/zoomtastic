@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Zoomtastic Test</title>
+	</head>
+
+	<body>
+		<img zoomtastic="https://via.placeholder.com/1500" src="https://via.placeholder.com/500" width="500" />
+
+		<script src="./dist/zoomtastic.umd.js"></script>
+		<script>
+			new Zoomtastic({
+				duration: 2000,
+				onShow: function() {
+					console.log('Shown!');
+				},
+				onHide: function() {
+					console.log('Hidden!');
+				},
+			}).listen('[zoomtastic]');
+		</script>
+	</body>
+</html>

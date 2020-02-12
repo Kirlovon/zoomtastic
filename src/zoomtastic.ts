@@ -15,16 +15,29 @@ interface ZoomtasticConfig {
 	left?: string | number;
 	width?: string | number;
 	height?: string | number;
+	filter?: string;
 	baseTop?: string | number;
 	baseLeft?: string | number;
 	baseWidth?: string | number;
 	baseHeight?: string | number;
+	baseFilter?: string;
 	onShow?: () => void;
 	onHide?: () => void;
 }
 
+/** Zoomtastic state */
+type State = 'shown' | 'hidden';
+
 /** Zoomtastic - Tiny image zoomer for web! */
 class Zoomtastic {
+	private state: State = 'shown';
+
+	/** Timers ( Like setTimeout and setInterval ) */
+	private delayTimer: NodeJS.Timer;
+	private loadingTimer: NodeJS.Timer;
+	private durationTimer: NodeJS.Timer;
+
+	/** Default config */
 	private config: ZoomtasticConfig = {
 		preload: true,
 		duration: 150,
@@ -36,12 +49,14 @@ class Zoomtastic {
 		zIndex: '16777271',
 		top: '50%',
 		left: '50%',
-		width: '95%',
-		height: '95%',
+		width: '90%',
+		height: '90%',
+		filter: 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))',
 		baseTop: '55%',
 		baseLeft: '50%',
-		baseHeight: '90%',
 		baseWidth: '90%',
+		baseHeight: '90%',
+		baseFilter: 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))',
 	};
 
 	/**
@@ -64,6 +79,12 @@ class Zoomtastic {
 			if (typeof this.config.left !== 'string') throw new TypeError('Field "left" must be a string');
 			if (typeof this.config.width !== 'string' && typeof this.config.width !== 'number') throw new TypeError('Field "width" must be a number or string');
 			if (typeof this.config.height !== 'string' && typeof this.config.height !== 'number') throw new TypeError('Field "height" must be a number or string');
+			if (typeof this.config.filter !== 'string') throw new TypeError('Field "filter" must be a string');
+			if (typeof this.config.baseTop !== 'string') throw new TypeError('Field "baseTop" must be a string');
+			if (typeof this.config.baseLeft !== 'string') throw new TypeError('Field "baseLeft" must be a string');
+			if (typeof this.config.baseWidth !== 'string' && typeof this.config.baseWidth !== 'number') throw new TypeError('Field "baseWidth" must be a number or string');
+			if (typeof this.config.baseHeight !== 'string' && typeof this.config.baseHeight !== 'number') throw new TypeError('Field "baseHeight" must be a number or string');
+			if (typeof this.config.baseFilter !== 'string') throw new TypeError('Field "baseFilter" must be a string');
 		}
 
 		// Mount elements to the page
@@ -76,6 +97,9 @@ class Zoomtastic {
 	private mount(): void {
 		const existingContainer: HTMLElement = document.getElementById('zoomtastic-container');
 		if (existingContainer) existingContainer.remove();
+
+		// Set state
+		this.state = 'hidden';
 
 		// Container element
 		const container: HTMLDivElement = document.createElement('div');
@@ -113,12 +137,26 @@ class Zoomtastic {
 		image.style.transitionProperty = 'all';
 		image.style.transitionDuration = this.config.duration + 'ms';
 		image.style.transitionTimingFunction = this.config.easing;
-		image.style.filter = 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))';
+		image.style.filter = this.config.baseFilter;
 
 		container.addEventListener('click', () => this.hide());
 
 		container.appendChild(image);
 		document.body.appendChild(container);
+	}
+
+	/** Clear timers */
+	private clearTimers(): void {
+		if (this.loadingTimer) clearInterval(this.loadingTimer);
+		if (this.durationTimer) clearInterval(this.durationTimer);
+		if (this.delayTimer) clearInterval(this.delayTimer);
+
+		// Sync state with the container
+		if (this.state === 'shown') {
+			document.getElementById('zoomtastic-container').style.display = 'block';
+		} else {
+			document.getElementById('zoomtastic-container').style.display = 'none';
+		}
 	}
 
 	/**
@@ -149,8 +187,17 @@ class Zoomtastic {
 	public show(url: string): void {
 		let ready: boolean = !this.config.preload;
 
+		// Check if url specified
+		if (typeof url !== 'string') throw new TypeError('URL must be a string');
+
 		const container: HTMLElement = document.getElementById('zoomtastic-container');
 		const image: HTMLElement = document.getElementById('zoomtastic-image');
+
+		// Callback
+		if (typeof this.config.onShow === 'function') this.config.onShow();
+
+		// Stop all animations
+		this.clearTimers();
 
 		// Show container
 		container.style.display = 'block';
@@ -164,23 +211,26 @@ class Zoomtastic {
 			const preloadedImage: HTMLImageElement = new Image();
 			preloadedImage.onload = () => {
 				ready = true;
-				if (typeof this.config.onShow === 'function') this.config.onShow();
+			};
+			preloadedImage.onerror = () => {
+				this.clearTimers();
 			};
 			preloadedImage.src = url;
-		} else {
-			if (typeof this.config.onShow === 'function') this.config.onShow();
 		}
 
 		// Show image
-		setTimeout(() => {
-			const loading: NodeJS.Timeout = setInterval(() => {
+		this.delayTimer = setTimeout(() => {
+			this.loadingTimer = setInterval(() => {
 				if (ready) {
 					image.style.opacity = '1';
 					image.style.top = String(this.config.top);
 					image.style.left = String(this.config.left);
 					image.style.width = String(this.config.width);
 					image.style.height = String(this.config.height);
-					clearInterval(loading);
+					image.style.filter = this.config.filter;
+
+					this.state = 'shown';
+					this.clearTimers();
 				}
 			}, 10);
 		}, this.config.delay);
@@ -193,8 +243,14 @@ class Zoomtastic {
 		const container: HTMLElement = document.getElementById('zoomtastic-container');
 		const image: HTMLElement = document.getElementById('zoomtastic-image');
 
-		// Event call
+		// Callback
 		if (typeof this.config.onHide === 'function') this.config.onHide();
+
+		// Stop all animations
+		this.clearTimers();
+
+		// Set state
+		this.state = 'hidden';
 
 		// Hide image
 		image.style.opacity = '0';
@@ -202,13 +258,14 @@ class Zoomtastic {
 		image.style.left = String(this.config.baseLeft);
 		image.style.width = String(this.config.baseWidth);
 		image.style.height = String(this.config.baseHeight);
+		image.style.filter = this.config.baseFilter;
 
 		// Hide container
-		setTimeout(() => {
+		this.delayTimer = setTimeout(() => {
 			container.style.opacity = '0';
 
 			// Set display none after transition
-			setTimeout(() => (container.style.display = 'none'), this.config.duration);
+			this.durationTimer = setTimeout(() => (container.style.display = 'none'), this.config.duration);
 		}, this.config.delay);
 	}
 }

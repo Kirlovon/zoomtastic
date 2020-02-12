@@ -69,12 +69,14 @@ or via [CDN](https://unpkg.com/): _( Should be added at the end of the body )_
 			left: '50%',
 			width: '95%',
 			height: '95%',
+			filter: 'drop-shadow(0 2px 32px black)',
 
 			// Initial styles used before image reveal
 			baseTop: '55%',
 			baseLeft: '50%',
 			baseHeight: '90%',
 			baseWidth: '90%',
+			baseFilter: 'drop-shadow(0 4px 64px black)',
 
 			// Callbacks
 			onShow: () => console.log('Shown!'),
