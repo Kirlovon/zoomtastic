@@ -22,7 +22,7 @@
 -   📦 Single-file library
 -   📚 Typescript Support
 
-## Instalation
+## Installation
 
 Installation via [NPM](https://www.npmjs.com/package/zoomtastic) repository:
 

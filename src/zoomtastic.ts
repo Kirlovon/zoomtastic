@@ -113,7 +113,7 @@ class Zoomtastic {
 		image.style.transitionProperty = 'all';
 		image.style.transitionDuration = this.config.duration + 'ms';
 		image.style.transitionTimingFunction = this.config.easing;
-		image.style.filter = 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.5))';
+		image.style.filter = 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))';
 
 		container.addEventListener('click', () => this.hide());
 
