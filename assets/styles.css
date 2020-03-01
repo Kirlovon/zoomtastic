@@ -89,15 +89,15 @@ header {
 }
 
 .image1 {
-	background-image: url('./image1.png');
+	background-image: url('./image1-small.jpg');
 }
 
 .image2 {
-	background-image: url('./image2.png');
+	background-image: url('./image2-small.jpg');
 }
 
 .image3 {
-	background-image: url('./image3.jpg');
+	background-image: url('./image3-small.jpg');
 }
 
 .info {
