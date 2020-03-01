@@ -3,61 +3,66 @@ import './polyfills';
 
 /** Zoomtastic config */
 interface ZoomtasticConfig {
-	preload?: boolean;
 	duration?: number;
-	delay?: number;
 	zoomInCursor?: string;
 	zoomOutCursor?: string;
 	background?: string;
 	easing?: string;
-	zIndex?: string | number;
-	top?: string | number;
-	left?: string | number;
-	width?: string | number;
-	height?: string | number;
-	filter?: string;
-	baseTop?: string | number;
-	baseLeft?: string | number;
-	baseWidth?: string | number;
-	baseHeight?: string | number;
-	baseFilter?: string;
-	onShow?: () => void;
-	onHide?: () => void;
+	zIndex?: number;
+	x?: number;
+	y?: number;
+	scale?: number;
+	initialX?: number;
+	initialY?: number;
+	initialScale?: number;
 }
-
-/** Zoomtastic state */
-type State = 'shown' | 'hidden';
 
 /** Zoomtastic - Tiny image zoomer for web! */
 class Zoomtastic {
-	private state: State = 'shown';
+	private clickable: boolean = false;
+	private timer0: NodeJS.Timer;
+	private timer1: NodeJS.Timer;
+	private timer2: NodeJS.Timer;
+	private timer3: NodeJS.Timer;
+	private timer4: NodeJS.Timer;
 
-	/** Timers ( Like setTimeout and setInterval ) */
-	private delayTimer: NodeJS.Timer;
-	private loadingTimer: NodeJS.Timer;
-	private durationTimer: NodeJS.Timer;
-
-	/** Default config */
+	/**
+	 * Default config
+	 */
 	private config: ZoomtasticConfig = {
-		preload: true,
-		duration: 150,
-		delay: 200,
+		duration: 200,
 		zoomInCursor: 'zoom-in',
 		zoomOutCursor: 'zoom-out',
 		background: 'rgba(0, 0, 0, 0.75)',
-		easing: 'ease-out',
-		zIndex: '16777271',
-		top: '50%',
-		left: '50%',
-		width: '90%',
-		height: '90%',
-		filter: 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))',
-		baseTop: '55%',
-		baseLeft: '50%',
-		baseWidth: '90%',
-		baseHeight: '90%',
-		baseFilter: 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.2))',
+		easing: 'linear',
+		zIndex: 16777271,
+		x: 0.5,
+		y: 0.5,
+		scale: 0.95,
+		initialX: 0.5,
+		initialY: 0.6,
+		initialScale: 0.95,
 	};
+
+	/**
+	 * On showing event
+	 */
+	public beforeShow: () => void;
+
+	/**
+	 * On showed event
+	 */
+	public afterShow: () => void;
+
+	/**
+	 * On hiding event
+	 */
+	public beforeHide: () => void;
+
+	/**
+	 * On hidden event
+	 */
+	public afterHide: () => void;
 
 	/**
 	 * Setup zoomtastic
@@ -66,25 +71,24 @@ class Zoomtastic {
 	constructor(config?: ZoomtasticConfig) {
 		if (config) {
 			if (typeof this.config !== 'object') throw new TypeError('Config must be an object');
+
+			// Merge custom and default config
 			this.config = Object.assign(this.config, config);
 
-			if (typeof this.config.preload !== 'boolean') throw new TypeError('Field "preload" must be a boolean');
-			if (typeof this.config.duration !== 'number') throw new TypeError('Field "duration" must be a number');
-			if (typeof this.config.delay !== 'number') throw new TypeError('Field "delay" must be a number');
+			// Validate config
+			if (typeof this.config.duration !== 'number' || this.config.duration < 0) throw new TypeError('Field "duration" must be a number greater than 0');
 			if (typeof this.config.zoomInCursor !== 'string') throw new TypeError('Field "zoomInCursor" must be a string');
 			if (typeof this.config.zoomOutCursor !== 'string') throw new TypeError('Field "zoomOutCursor" must be a string');
 			if (typeof this.config.background !== 'string') throw new TypeError('Field "background" must be a string');
 			if (typeof this.config.easing !== 'string') throw new TypeError('Field "easing" must be a string');
-			if (typeof this.config.top !== 'string') throw new TypeError('Field "top" must be a string');
-			if (typeof this.config.left !== 'string') throw new TypeError('Field "left" must be a string');
-			if (typeof this.config.width !== 'string' && typeof this.config.width !== 'number') throw new TypeError('Field "width" must be a number or string');
-			if (typeof this.config.height !== 'string' && typeof this.config.height !== 'number') throw new TypeError('Field "height" must be a number or string');
-			if (typeof this.config.filter !== 'string') throw new TypeError('Field "filter" must be a string');
-			if (typeof this.config.baseTop !== 'string') throw new TypeError('Field "baseTop" must be a string');
-			if (typeof this.config.baseLeft !== 'string') throw new TypeError('Field "baseLeft" must be a string');
-			if (typeof this.config.baseWidth !== 'string' && typeof this.config.baseWidth !== 'number') throw new TypeError('Field "baseWidth" must be a number or string');
-			if (typeof this.config.baseHeight !== 'string' && typeof this.config.baseHeight !== 'number') throw new TypeError('Field "baseHeight" must be a number or string');
-			if (typeof this.config.baseFilter !== 'string') throw new TypeError('Field "baseFilter" must be a string');
+			if (typeof this.config.zIndex !== 'number') throw new TypeError('Field "zIndex" must be a number or string');
+			if (typeof this.config.x !== 'number' || this.config.x > 1 || this.config.x < 0) throw new TypeError('Field "x" must be a number in the range from 0 to 1');
+			if (typeof this.config.y !== 'number' || this.config.y > 1 || this.config.y < 0) throw new TypeError('Field "y" must be a number in the range from 0 to 1');
+			if (typeof this.config.scale !== 'number' || this.config.scale > 1 || this.config.scale < 0) throw new TypeError('Field "scale" must be a number in the range from 0 to 1');
+			if (typeof this.config.initialX !== 'number' || this.config.initialX > 1 || this.config.initialX < 0) throw new TypeError('Field "initialX" must be a number in the range from 0 to 1');
+			if (typeof this.config.initialY !== 'number' || this.config.initialY > 1 || this.config.initialY < 0) throw new TypeError('Field "initialY" must be a number in the range from 0 to 1');
+			if (typeof this.config.initialScale !== 'number' || this.config.initialScale > 1 || this.config.initialScale < 0)
+				throw new TypeError('Field "initialScale" must be a number in the range from 0 to 1');
 		}
 
 		// Mount elements to the page
@@ -96,10 +100,9 @@ class Zoomtastic {
 	 */
 	private mount(): void {
 		const existingContainer: HTMLElement = document.getElementById('zoomtastic-container');
-		if (existingContainer) existingContainer.remove();
 
-		// Set state
-		this.state = 'hidden';
+		// Delete container if it is already exists
+		if (existingContainer) existingContainer.remove();
 
 		// Container element
 		const container: HTMLDivElement = document.createElement('div');
@@ -108,25 +111,38 @@ class Zoomtastic {
 		container.style.left = '0';
 		container.style.width = '100%';
 		container.style.height = '100vh';
-		container.style.opacity = '0';
+		container.style.display = 'block';
 		container.style.position = 'fixed';
 		container.style.overflow = 'hidden';
 		container.style.cursor = this.config.zoomOutCursor;
 		container.style.zIndex = String(this.config.zIndex);
-		container.style.backgroundColor = this.config.background;
-		container.style.transitionProperty = 'all';
-		container.style.transitionDuration = this.config.duration + 'ms';
-		container.style.transitionTimingFunction = this.config.easing;
 		container.style.display = 'none';
+
+		// Background element
+		const background: HTMLDivElement = document.createElement('div');
+		background.id = 'zoomtastic-background';
+		background.style.top = '0';
+		background.style.left = '0';
+		background.style.width = '100%';
+		background.style.height = '100%';
+		background.style.zIndex = '0';
+		background.style.opacity = '0';
+		background.style.position = 'absolute';
+		background.style.backgroundColor = this.config.background;
+		background.style.transitionProperty = 'opacity';
+		background.style.transitionDuration = Math.round(this.config.duration) + 'ms';
+		background.style.transitionTimingFunction = this.config.easing;
+		background.style.pointerEvents = 'none';
+		background.style.userSelect = 'none';
 
 		// Image element
 		const image: HTMLDivElement = document.createElement('div');
 		image.id = 'zoomtastic-image';
-		image.style.top = String(this.config.baseTop);
-		image.style.left = String(this.config.baseLeft);
-		image.style.width = String(this.config.baseWidth);
-		image.style.height = String(this.config.baseHeight);
-		image.style.zIndex = String(this.config.zIndex);
+		image.style.top = String(this.config.initialY * 100) + '%';
+		image.style.left = String(this.config.initialX * 100) + '%';
+		image.style.width = String(this.config.initialScale * 100) + '%';
+		image.style.height = String(this.config.initialScale * 100) + '%';
+		image.style.zIndex = '16777271';
 		image.style.opacity = '0';
 		image.style.display = 'block';
 		image.style.position = 'absolute';
@@ -135,36 +151,45 @@ class Zoomtastic {
 		image.style.backgroundRepeat = 'no-repeat';
 		image.style.backgroundPosition = 'center';
 		image.style.transitionProperty = 'all';
-		image.style.transitionDuration = this.config.duration + 'ms';
+		image.style.transitionDuration = Math.round(this.config.duration / 2) + 'ms';
 		image.style.transitionTimingFunction = this.config.easing;
-		image.style.filter = this.config.baseFilter;
+		image.style.pointerEvents = 'none';
+		image.style.userSelect = 'none';
+		image.style.filter = 'drop-shadow(0 4px 64px rgba(0, 0, 0, 0.1))';
 
-		container.addEventListener('click', () => this.hide());
+		// Hide on container click
+		container.addEventListener('click', () => {
+			if (this.clickable) {
+				this.hide();
+				this.clickable = false;
+			}
+		});
 
+		// Add elements to container
 		container.appendChild(image);
+		container.appendChild(background);
+
+		// Add to body
 		document.body.appendChild(container);
 	}
 
-	/** Clear timers */
+	/**
+	 * Clear internal tiemrs
+	 */
 	private clearTimers(): void {
-		if (this.loadingTimer) clearInterval(this.loadingTimer);
-		if (this.durationTimer) clearInterval(this.durationTimer);
-		if (this.delayTimer) clearInterval(this.delayTimer);
-
-		// Sync state with the container
-		if (this.state === 'shown') {
-			document.getElementById('zoomtastic-container').style.display = 'block';
-		} else {
-			document.getElementById('zoomtastic-container').style.display = 'none';
-		}
+		clearTimeout(this.timer0);
+		clearTimeout(this.timer1);
+		clearTimeout(this.timer2);
+		clearTimeout(this.timer3);
+		clearTimeout(this.timer4);
 	}
 
 	/**
 	 * Listen elements for automatic image zooming
-	 * @param selector Elements selector
+	 * @param attribute Search elements by the specified attribute
 	 */
-	public listen(selector: string = '[zoomtastic]'): void {
-		const elements: NodeListOf<Element> = document.querySelectorAll(selector);
+	public listen(attribute: string = 'zoomtastic'): void {
+		const elements: NodeListOf<Element> = document.querySelectorAll(`[${attribute}]`);
 
 		// Add event listener to each found element
 		elements.forEach((item: HTMLElement) => {
@@ -173,8 +198,10 @@ class Zoomtastic {
 			item.addEventListener('click', (event: MouseEvent) => {
 				event.preventDefault();
 
+				this.clickable = false;
+
 				// Get image url from attributes
-				let url: string = item.getAttribute('zoomtastic') || item.getAttribute('src') || item.getAttribute('lowsrc');
+				let url: string = item.getAttribute(attribute) || item.getAttribute('src') || item.getAttribute('lowsrc');
 				if (url) this.show(url);
 			});
 		});
@@ -184,89 +211,81 @@ class Zoomtastic {
 	 * Show image
 	 * @param url Image url
 	 */
-	public show(url: string): void {
-		let ready: boolean = !this.config.preload;
+	public async show(url: string): Promise<void> {
+		const container: HTMLElement = document.getElementById('zoomtastic-container');
+		const background: HTMLElement = document.getElementById('zoomtastic-background');
+		const image: HTMLElement = document.getElementById('zoomtastic-image');
 
 		// Check if url specified
 		if (typeof url !== 'string') throw new TypeError('URL must be a string');
 
-		const container: HTMLElement = document.getElementById('zoomtastic-container');
-		const image: HTMLElement = document.getElementById('zoomtastic-image');
+		// Event
+		if (typeof this.beforeShow === 'function') this.beforeShow();
 
-		// Callback
-		if (typeof this.config.onShow === 'function') this.config.onShow();
-
-		// Stop all animations
+		// Clear timers
 		this.clearTimers();
 
-		// Show container
+		// Change cursor
+		container.style.cursor = this.config.zoomOutCursor;
+
+		// Show container and background
 		container.style.display = 'block';
-		setTimeout(() => (container.style.opacity = '1'), 0);
+		this.timer0 = setTimeout(() => (background.style.opacity = '1'), 0);
 
 		// Apply image
 		image.style.backgroundImage = `url("${encodeURI(url)}")`;
 
-		// Preload image
-		if (this.config.preload) {
-			const preloadedImage: HTMLImageElement = new Image();
-			preloadedImage.onload = () => {
-				ready = true;
-			};
-			preloadedImage.onerror = () => {
-				this.clearTimers();
-			};
-			preloadedImage.src = url;
-		}
-
 		// Show image
-		this.delayTimer = setTimeout(() => {
-			this.loadingTimer = setInterval(() => {
-				if (ready) {
-					image.style.opacity = '1';
-					image.style.top = String(this.config.top);
-					image.style.left = String(this.config.left);
-					image.style.width = String(this.config.width);
-					image.style.height = String(this.config.height);
-					image.style.filter = this.config.filter;
+		this.timer1 = setTimeout(() => {
+			this.clickable = true;
+			image.style.opacity = '1';
+			image.style.top = String(this.config.x * 100) + '%';
+			image.style.left = String(this.config.y * 100) + '%';
+			image.style.width = String(this.config.scale * 100) + '%';
+			image.style.height = String(this.config.scale * 100) + '%';
+		}, Math.round(this.config.duration / 2));
 
-					this.state = 'shown';
-					this.clearTimers();
-				}
-			}, 10);
-		}, this.config.delay);
+		// When image showed
+		this.timer2 = setTimeout(() => {
+			if (typeof this.afterShow === 'function') this.afterShow();
+		}, Math.round(this.config.duration));
 	}
 
 	/**
 	 * Hide zoomed image
 	 */
-	public hide(): void {
+	public async hide(): Promise<void> {
 		const container: HTMLElement = document.getElementById('zoomtastic-container');
+		const background: HTMLElement = document.getElementById('zoomtastic-background');
 		const image: HTMLElement = document.getElementById('zoomtastic-image');
 
-		// Callback
-		if (typeof this.config.onHide === 'function') this.config.onHide();
+		// Event
+		if (typeof this.beforeHide === 'function') this.beforeHide();
 
-		// Stop all animations
+		// Clear timers
 		this.clearTimers();
 
-		// Set state
-		this.state = 'hidden';
+		// Change cursor
+		container.style.cursor = 'auto';
 
 		// Hide image
 		image.style.opacity = '0';
-		image.style.top = String(this.config.baseTop);
-		image.style.left = String(this.config.baseLeft);
-		image.style.width = String(this.config.baseWidth);
-		image.style.height = String(this.config.baseHeight);
-		image.style.filter = this.config.baseFilter;
+		image.style.top = String(this.config.initialY * 100) + '%';
+		image.style.left = String(this.config.initialX * 100) + '%';
+		image.style.width = String(this.config.initialScale * 100) + '%';
+		image.style.height = String(this.config.initialScale * 100) + '%';
 
-		// Hide container
-		this.delayTimer = setTimeout(() => {
-			container.style.opacity = '0';
+		// Hide background
+		this.timer3 = setTimeout(() => {
+			background.style.opacity = '0';
+		}, Math.round(this.config.duration / 2));
 
-			// Set display none after transition
-			this.durationTimer = setTimeout(() => (container.style.display = 'none'), this.config.duration);
-		}, this.config.delay);
+		// Hide container after transition
+		this.timer4 = setTimeout(() => {
+			container.style.display = 'none';
+			this.clickable = true;
+			if (typeof this.afterHide === 'function') this.afterHide();
+		}, Math.round(this.config.duration));
 	}
 }
 

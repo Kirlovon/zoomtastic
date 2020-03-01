@@ -10,15 +10,35 @@
 
 		<script src="./dist/zoomtastic.umd.js"></script>
 		<script>
-			new Zoomtastic({
-				duration: 2000,
-				onShow: function() {
-					console.log('Shown!');
-				},
-				onHide: function() {
-					console.log('Hidden!');
-				},
-			}).listen('[zoomtastic]');
+			const zoomer = new Zoomtastic({
+				duration: 200,
+				scale: 0.95,
+				background: 'rgba(0, 0, 0, 0.5)',
+				initialY: 0.6,
+				initialScale: 0.95,
+			});
+
+			zoomer.listen();
+
+			zoomer.afterShow = function() {
+				console.log('Shown!');
+				console.timeEnd('ShowTime');
+			};
+
+			zoomer.afterHide = function() {
+				console.log('Hidden!');
+				console.timeEnd('HideTime');
+			};
+
+			zoomer.beforeShow = function() {
+				console.log('Showing...');
+				console.time('ShowTime');
+			};
+
+			zoomer.beforeHide = function() {
+				console.log('Hidding...');
+				console.time('HideTime');
+			};
 		</script>
 	</body>
 </html>

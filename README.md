@@ -12,15 +12,16 @@
 	<img src="https://img.shields.io/npm/types/zoomtastic.svg" alt="Types">
 </p>
 
-<br>
+<a href="https://kirlovon.github.io/Zoomtastic/">
+	<h4 align="center">🔎 Demo</h4>
+</a>
 
 ## Features
 
 -   📊 Lightweight _( Around ***2kb*** gzipped )_
--   📝 Customizable Animation
--   🥂 Short and Simple API
--   📦 Single-file library
--   📚 Typescript Support
+-   🥂 Short and simple API
+-   📚 Typescript support
+-   📦 No dependencies
 
 ## Installation
 
@@ -30,7 +31,7 @@ Installation via [NPM](https://www.npmjs.com/package/zoomtastic) repository:
 npm install zoomtastic --save
 ```
 
-or via [CDN](https://unpkg.com/): _( Should be added at the end of the body )_
+or via [CDN](https://unpkg.com/):
 
 ```html
 <script src="https://unpkg.com/zoomtastic"></script>
@@ -48,14 +49,8 @@ or via [CDN](https://unpkg.com/): _( Should be added at the end of the body )_
 	<script src="https://unpkg.com/zoomtastic"></script>
 	<script>
 		const viewer = new Zoomtastic({
-			// If true, image will be shown only after loading completion
-			preload: true,
-
 			// Transition duration
-			duration: 150,
-
-			// Delay between container transition and image transition
-			delay: 200,
+			duration: 200,
 
 			// Cursor on hover
 			zoomInCursor: 'zoom-in',
@@ -63,34 +58,34 @@ or via [CDN](https://unpkg.com/): _( Should be added at the end of the body )_
 
 			// Styles for the elements
 			background: 'rgba(0, 0, 0, 0.75)',
-			easing: 'ease-out',
+			easing: 'linear',
 			zIndex: '16777271',
-			top: '50%',
-			left: '50%',
-			width: '95%',
-			height: '95%',
-			filter: 'drop-shadow(0 2px 32px black)',
 
-			// Initial styles used before image reveal
-			baseTop: '55%',
-			baseLeft: '50%',
-			baseHeight: '90%',
-			baseWidth: '90%',
-			baseFilter: 'drop-shadow(0 4px 64px black)',
+			// Parameters used when the image is shown
+			x: 0.5,
+			y: 0.5,
+			scale: 0.95,
 
-			// Callbacks
-			onShow: () => console.log('Shown!'),
-			onHide: () => console.log('Hidden!'),
+			// Initial parameters used when image is hidden
+			initialX: 0.5,
+			initialY: 0.6,
+			initialScale: 0.9,
 		});
 
-		// Listen for an elements found by specified selector
-		viewer.listen('[zoomtastic]');
+		// Listen for an elements that contains specified attribute
+		viewer.listen('zoomtastic');
 
 		// Show image viewer
 		viewer.show('https://via.placeholder.com/600');
 
 		// Hide image viewer
 		viewer.hide();
+
+		// Events
+		viewer.beforeShow = () => console.log('Showing...');
+		viewer.afterShow = () => console.log('Shown!');
+		viewer.beforeHide = () => console.log('Hidding...');
+		viewer.afterHide = () => console.log('Hidden!');
 	</script>
 </body>
 ```
