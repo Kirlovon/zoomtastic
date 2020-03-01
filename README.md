@@ -12,9 +12,9 @@
 	<img src="https://img.shields.io/npm/types/zoomtastic.svg" alt="Types">
 </p>
 
-<a href="https://kirlovon.github.io/Zoomtastic/">
-	<h4 align="center">🔎 Demo</h4>
-</a>
+<p align="center">
+  <a href="https://kirlovon.github.io/Zoomtastic/">🔎 Demo</a>
+</p>
 
 ## Features
 
