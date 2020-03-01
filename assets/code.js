@@ -1,1 +1,1 @@
-new Zoomtastic().listen('[zoomtastic]');
+new Zoomtastic().listen('zoomtastic');
