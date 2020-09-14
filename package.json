@@ -1,6 +1,6 @@
 {
 	"name": "zoomtastic",
-	"version": "1.0.5",
+	"version": "1.1.0",
 	"description": "Tiny image zoomer for web!",
 	"repository": "https://github.com/Kirlovon/Zoomtastic.git",
 	"homepage": "https://github.com/Kirlovon/Zoomtastic",
@@ -16,9 +16,11 @@
 	],
 	"license": "MIT",
 	"main": "./dist/zoomtastic.umd.js",
+	"types": "./dist/zoomtastic.d.ts",
 	"module": "./dist/zoomtastic.umd.js",
 	"scripts": {
 		"build": "webpack --env.production",
+		"types": "tsc zoomtastic.js --declaration --allowJs --emitDeclarationOnly --outDir dist",
 		"dev": "webpack --env.development"
 	},
 	"files": [
@@ -38,6 +40,7 @@
 		"@babel/preset-env": "^7.11.5",
 		"babel-loader": "^8.1.0",
 		"prettier": "^1.19.1",
+		"typescript": "^4.0.2",
 		"webpack": "^4.44.1",
 		"webpack-cli": "^3.3.12"
 	}
