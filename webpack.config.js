@@ -19,7 +19,6 @@ const config = env => {
             filename: 'zoomtastic.umd.js',
             sourceMapFilename: 'zoomtastic.umd.js.map',
             path: path.resolve(__dirname, 'dist'),
-            devtoolLineToLine: true,
         },
         module: {
             rules: [

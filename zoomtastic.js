@@ -77,10 +77,10 @@ const Zoomtastic = {
         });
 
         setTimeout(() => {
+            imageElement.style.backgroundImage = 'none';
             containerElement.style.visibility = 'hidden';
         }, this.duration);
     }
-
 }
 
 /**
@@ -137,7 +137,6 @@ function init() {
         transitionTimingFunction: 'ease',
         transform: 'translate(-50%, -50%)',
     });
-
     
     containerElement.addEventListener('click', () => Zoomtastic.hide());
     

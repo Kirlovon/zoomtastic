@@ -66,5 +66,4 @@ _API is so simple that you don't even need documentation, take a look:_
 ```
 
 ## License
-
 [MIT](https://github.com/Kirlovon/Zoomtastic/blob/master/LICENSE)
