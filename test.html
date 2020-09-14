@@ -1,44 +1,24 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Zoomtastic Test</title>
-	</head>
 
-	<body>
-		<img zoomtastic="https://via.placeholder.com/1500" src="https://via.placeholder.com/500" width="500" />
+<head>
+	<meta charset="UTF-8" />
+	<title>Zoomtastic Test</title>
+</head>
 
-		<script src="./dist/zoomtastic.umd.js"></script>
-		<script>
-			const zoomer = new Zoomtastic({
-				duration: 200,
-				scale: 0.95,
-				background: 'rgba(0, 0, 0, 0.5)',
-				initialY: 0.6,
-				initialScale: 0.95,
-			});
+<body>
+	<script src="./dist/zoomtastic.umd.js"></script>
 
-			zoomer.listen();
+	<img zoomtastic="./assets/logo.png" src="./assets/logo.png" width="500" />
 
-			zoomer.afterShow = function() {
-				console.log('Shown!');
-				console.timeEnd('ShowTime');
-			};
+	<script>
+		Zoomtastic.size = '75%';
+		Zoomtastic.easing = 'linear';
+		Zoomtastic.duration = 500;
+		Zoomtastic.background = 'rgba(0, 0, 0, 0.9)';
 
-			zoomer.afterHide = function() {
-				console.log('Hidden!');
-				console.timeEnd('HideTime');
-			};
+		Zoomtastic.listen('zoomtastic');
+	</script>
+</body>
 
-			zoomer.beforeShow = function() {
-				console.log('Showing...');
-				console.time('ShowTime');
-			};
-
-			zoomer.beforeHide = function() {
-				console.log('Hidding...');
-				console.time('HideTime');
-			};
-		</script>
-	</body>
 </html>

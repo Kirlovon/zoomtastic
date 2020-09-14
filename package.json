@@ -1,33 +1,25 @@
 {
 	"name": "zoomtastic",
-	"amdName": "Zoomtastic",
-	"version": "0.5.0",
+	"version": "1.0.0",
 	"description": "Tiny image zoomer for web!",
 	"repository": "https://github.com/Kirlovon/Zoomtastic.git",
 	"homepage": "https://github.com/Kirlovon/Zoomtastic",
 	"author": "Kirlovon",
 	"keywords": [
-		"typescript",
-		"typescript-library",
-		"ts",
 		"javascript",
 		"javascript-library",
 		"js",
 		"browser",
 		"image",
 		"image-viewer",
-		"microbundle"
+		"webpack"
 	],
 	"license": "MIT",
-	"source": "./src/zoomtastic.ts",
-	"main": "./dist/zoomtastic.js",
-	"module": "./dist/zoomtastic.m.js",
-	"unpkg": "./dist/zoomtastic.umd.js",
-	"browser": "./dist/zoomtastic.umd.js",
-	"types": "./dist/zoomtastic.d.ts",
+	"main": "./dist/zoomtastic.umd.js",
+	"module": "./dist/zoomtastic.umd.js",
 	"scripts": {
-		"build": "microbundle build",
-		"dev": "microbundle watch"
+		"build": "webpack --env.production",
+		"dev": "webpack --env.development"
 	},
 	"files": [
 		"dist/",
@@ -42,7 +34,11 @@
 		"singleQuote": true
 	},
 	"devDependencies": {
-		"microbundle": "^0.11.0",
-		"prettier": "^1.19.1"
+		"@babel/core": "^7.11.6",
+		"@babel/preset-env": "^7.11.5",
+		"babel-loader": "^8.1.0",
+		"prettier": "^1.19.1",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12"
 	}
 }

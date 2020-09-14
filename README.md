@@ -17,11 +17,9 @@
 </p>
 
 ## Features
-
--   📊 Lightweight _( Around ***2kb*** gzipped )_
--   🥂 Short and simple API
--   📚 Typescript support
--   📦 No dependencies
+- 📊 Lightweight _( Less than ***2kb*** gzipped )_
+- 🥂 Short and simple API
+- 📦 No dependencies
 
 ## Installation
 
@@ -48,44 +46,17 @@ or via [CDN](https://unpkg.com/):
 
 	<script src="https://unpkg.com/zoomtastic"></script>
 	<script>
-		const viewer = new Zoomtastic({
-			// Transition duration
-			duration: 200,
 
-			// Cursor on hover
-			zoomInCursor: 'zoom-in',
-			zoomOutCursor: 'zoom-out',
-
-			// Styles for the elements
-			background: 'rgba(0, 0, 0, 0.75)',
-			easing: 'linear',
-			zIndex: '16777271',
-
-			// Parameters used when the image is shown
-			x: 0.5,
-			y: 0.5,
-			scale: 0.95,
-
-			// Initial parameters used when image is hidden
-			initialX: 0.5,
-			initialY: 0.6,
-			initialScale: 0.9,
-		});
-
+		// Change default 
 		// Listen for an elements that contains specified attribute
-		viewer.listen('zoomtastic');
+		Zoomtastic.listen('zoomtastic');
 
 		// Show image viewer
-		viewer.show('https://via.placeholder.com/600');
+		Zoomtastic.show('https://via.placeholder.com/600');
 
 		// Hide image viewer
-		viewer.hide();
+		Zoomtastic.hide();
 
-		// Events
-		viewer.beforeShow = () => console.log('Showing...');
-		viewer.afterShow = () => console.log('Shown!');
-		viewer.beforeHide = () => console.log('Hidding...');
-		viewer.afterHide = () => console.log('Hidden!');
 	</script>
 </body>
 ```
