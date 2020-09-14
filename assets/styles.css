@@ -20,13 +20,16 @@ header {
 	text-align: start;
 	font-size: 14px;
 	line-height: 32px;
+	margin-bottom: 24px;
 	justify-content: center;
 }
 
 .link {
 	margin: 0 16px;
 	width: auto;
-	letter-spacing: 1px;
+	font-size: 11px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
 }
 
 .logo {
