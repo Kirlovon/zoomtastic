@@ -35,7 +35,7 @@ or via [CDN](https://unpkg.com/):
 ```
 
 ## Example
-
+_API is so simple that you don't even need documentation, take a look:_
 ```html
 <body>
 	<!-- Possible ways to image zooming -->
