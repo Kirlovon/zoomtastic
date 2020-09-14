@@ -9,7 +9,6 @@
 	<img src="https://img.shields.io/github/license/Kirlovon/Zoomtastic.svg" alt="License">
 	<img src="https://img.shields.io/github/last-commit/Kirlovon/Zoomtastic.svg" alt="Last commit">
 	<img src="https://img.shields.io/npm/v/zoomtastic.svg" alt="NPM version">
-	<img src="https://img.shields.io/npm/types/zoomtastic.svg" alt="Types">
 </p>
 
 <p align="center">
