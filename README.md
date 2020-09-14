@@ -47,15 +47,20 @@ or via [CDN](https://unpkg.com/):
 	<script src="https://unpkg.com/zoomtastic"></script>
 	<script>
 
-		// Change default 
 		// Listen for an elements that contains specified attribute
 		Zoomtastic.listen('zoomtastic');
 
-		// Show image viewer
+		// Show image viewer manually
 		Zoomtastic.show('https://via.placeholder.com/600');
 
 		// Hide image viewer
 		Zoomtastic.hide();
+
+		// Changing parameters
+		Zoomtastic.size = '75%';
+		Zoomtastic.easing = 'linear';
+		Zoomtastic.duration = 500;
+		Zoomtastic.background = 'rgba(0, 0, 0, 0.9)';
 
 	</script>
 </body>
