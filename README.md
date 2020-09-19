@@ -20,6 +20,7 @@
 - 📊 Lightweight _( Less than ***2kb*** gzipped )_
 - 🥂 Short and simple API
 - 📦 No dependencies
+- 🌐 IE11 Support
 
 ## Installation
 
