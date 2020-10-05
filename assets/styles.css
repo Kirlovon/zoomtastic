@@ -121,7 +121,23 @@ main {
 .info:hover {
 	opacity: 1;
 }
+
+.message {
+	position: absolute;
+	opacity: 0.2;
+	width: 200px;
+	height: 200px;
+	top: 200px;
+	right: -20px;
+	user-select: none;
+	pointer-events: none;
+}
+
 @media (max-width: 800px) {
+	.message {
+		display: none;
+	}
+
 	.images {
 		flex-direction: column;
 		margin: 0;
