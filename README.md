@@ -17,10 +17,12 @@
 </p>
 
 ## Features
-- 📊 Lightweight _( Less than ***2kb*** gzipped )_
+- 📊 Lightweight _(Around ***1.5kb*** gzipped)_
 - 🥂 Short and simple API
 - 📦 No dependencies
 - 🌐 IE11 Support
+
+<br>
 
 ## Installation
 
@@ -33,35 +35,40 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic"></script>
+<script src="https://unpkg.com/zoomtastic@2.0.0"></script>
 ```
+
+<br>
 
 ## Example
 _API is so simple that you don't even need documentation, take a look at HTML example:_
 ```html
 <body>
-	<!-- Possible ways to image zooming -->
+	<img zoomtastic src="https://via.placeholder.com/100" />
 	<img zoomtastic src="https://via.placeholder.com/200" />
-	<img zoomtastic="https://via.placeholder.com/900" src="https://via.placeholder.com/300" />
-	<div zoomtastic="https://via.placeholder.com/400">Click to open!</div>
+	<img zoomtastic src="https://via.placeholder.com/300" />
 
 	<script src="https://unpkg.com/zoomtastic"></script>
 	<script>
 
-		// Listen for an elements that contains specified attribute
-		Zoomtastic.listen('zoomtastic');
+		// Mount viewer elements
+		Zoomtastic.mount({
+			size: '95%',
+			easing: 'ease',
+			duration: 200,
+			background: 'rgba(0, 0, 0, 0.9)',
+			filter: 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))',
+			animation: 'slide' // Can be slide, fade, zoom or drop
+		});
 
-		// Show image viewer manually
+		// Listen for an elements that contains "zoomtastic" attribute, and use "src" attribute as image source
+		Zoomtastic.listen('[zoomtastic]', 'zoomtastic');
+
+		// Show image manually
 		Zoomtastic.show('https://via.placeholder.com/600');
 
-		// Hide image viewer
+		// Hide image
 		Zoomtastic.hide();
-
-		// Changing parameters
-		Zoomtastic.size = '75%';
-		Zoomtastic.easing = 'linear';
-		Zoomtastic.duration = 500;
-		Zoomtastic.background = 'rgba(0, 0, 0, 0.9)';
 
 	</script>
 </body>
@@ -70,12 +77,44 @@ _Alternatively, you can use a bundlers like [Webpack](https://webpack.js.org/), 
 ```javascript
 import Zoomtastic from 'zoomtastic';
 
+// Mount viewer elements
+Zoomtastic.mount();
+
 // Show image viewer manually
 Zoomtastic.show('https://via.placeholder.com/600');
 
 // Hide image viewer
 Zoomtastic.hide();
 ```
+
+<br>
+
+## API
+
+### Zoomtastic.mount(_config_)
+This function creates and mounts to the page the necessary Zoomtastic elements. If you call this function again, the elements will be recreated.
+
+The configuration is optional, and has these parameters:
+* **size** - Image size. _(Default: `95%`)_
+* **ease** - Timing function. _(Default: `ease`)_
+* **duration** - Animations duration. _(Default: `200`)_
+* **background** - Viewer background. _(Default: `rgba(0, 0, 0, 0.9)`)_
+* **filter** - CSS filter applied to image. _(Default: `drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))`)_
+* **animation** - Animation type. Can be `slide`, `fade`, `zoom` or `drop`. _(Default: `slide`)_ 
+
+### Zoomtastic.listen(_target_, _source_)
+ Add click event listener to the image elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute. 
+
+The **target** should be a CSS selector, an element or an array of elements.
+The **source** argument must be the name of the attribute from which URL to the image will be taken.
+
+### Zoomtastic.show(_url_)
+Show image viewer. The **url** argument must be link to the image.
+
+### Zoomtastic.hide()
+Hide image viewer.
+
+<br>
 
 ## License
 [MIT](https://github.com/Kirlovon/Zoomtastic/blob/master/LICENSE)

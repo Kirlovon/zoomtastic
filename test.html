@@ -4,20 +4,47 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Zoomtastic Test</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: row;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+	</style>
 </head>
 
 <body>
+
+	<h2>1</h1>
+	<img zoomtastic="./assets/logo.png" src="./assets/logo.png" width="200" />
+	
+	<h2>2</h2>
+	<img class="zoomable" src="./assets/logo.png" width="200" />
+	
+	<h2>3</h2>
+	<img id="image" imageSource="./assets/logo.png" src="./assets/logo.png" width="200" />
+		
 	<script src="./dist/zoomtastic.umd.js"></script>
-
-	<img zoomtastic="./assets/logo.png" src="./assets/logo.png" width="500" />
-
 	<script>
-		Zoomtastic.size = '75%';
-		Zoomtastic.easing = 'linear';
-		Zoomtastic.duration = 500;
-		Zoomtastic.background = 'rgba(0, 0, 0, 0.9)';
 
-		Zoomtastic.listen('zoomtastic');
+		Zoomtastic.mount({
+			size: '50%',
+			easing: 'linear',
+			duration: 100,
+			background: 'rgba(0, 0, 0, 0.2)',
+			filter: 'none',
+			animation: 'zoom'
+		});
+
+		// 1
+		Zoomtastic.listen();
+		
+		// 2
+		Zoomtastic.listen('.zoomable', 'src');
+
+		// 3
+		Zoomtastic.listen(document.getElementById('image'), 'imageSource');
+		
 	</script>
 </body>
 
