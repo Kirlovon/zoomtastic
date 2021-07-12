@@ -6,7 +6,7 @@
 
 body {
 	overflow-x: hidden;
-	background-color: white;
+	background-color: #ffffff;
 }
 
 main {
@@ -29,6 +29,7 @@ main {
 }
 
 .link {
+	opacity: 0.75;
 	color: black;
 	margin: 0 16px;
 	width: auto;
@@ -46,6 +47,7 @@ main {
 
 .link:hover {
 	color: black;
+	opacity: 1;
 }
 
 .logo {
@@ -68,7 +70,7 @@ main {
 	font-weight: bold;
 	text-align: center;
 	margin-bottom: -4px;
-	text-shadow: 0 -4px white, -2px -3px white, 2px 3px white, -2px 3px white;
+	text-shadow: 0 -3.5px #fff, 0 3.5px #fff, -3.5px 0 #fff, 3.5px 0 #fff, -3px -2px #fff, 3px 2px #fff;
 }
 
 .description {
@@ -81,8 +83,8 @@ main {
 }
 
 .images {
-	margin: 0 -16px;
 	margin-top: 64px;
+	padding: 0 16px;
 	width: 100%;
 	height: auto;
 	display: flex;
@@ -123,20 +125,41 @@ main {
 	background-image: url('./image3-small.jpg');
 }
 
-.info {
-	user-select: none;
+.bottom {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
 	font-size: 12px;
 	margin-top: 16px;
-	width: 100%;
-	height: 32px;
-	text-align: center;
-	opacity: 0.75;
-	letter-spacing: 1px;
-	transition: 0.2s opacity linear;
+	padding: 0 32px;
 }
 
-.info:hover {
+.switcher {
+	display: flex;
+	text-align: left;
+	flex-direction: row;
+}
+
+.animation-button {
+	cursor: pointer;
+	font-weight: bold;
+	margin-right: 8px;
+	opacity: 0.75;
+}
+
+.animation-button.active {
+	text-decoration: underline;
+	text-underline-offset: 2px;
 	opacity: 1;
+}
+
+.info {
+	width: 100%;
+	user-select: none;
+	text-align: right;
+	letter-spacing: 1px;
+	text-underline-offset: 2px;
+	opacity: 0.75;
 }
 
 .message {
@@ -144,8 +167,8 @@ main {
 	opacity: 0.2;
 	width: 200px;
 	height: 200px;
-	top: 200px;
-	right: -20px;
+	top: 180px;
+	right: -28px;
 	user-select: none;
 	pointer-events: none;
 }
@@ -173,5 +196,14 @@ main {
 	.image3:hover {
 		transform: scale(1.05);
 		margin: 16px 0;
+	}
+
+	.bottom {
+		font-size: 10px;
+		padding: 0 0;
+	}
+
+	.info {
+		letter-spacing: 0px;
 	}
 }
