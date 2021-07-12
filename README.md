@@ -41,7 +41,7 @@ or via [CDN](https://unpkg.com/):
 <br>
 
 ## Example
-_API is so simple that you don't even need documentation, take a look at HTML example:_
+API is so simple that you don't even need documentation, take a look at HTML example:
 ```html
 <body>
 	<img zoomtastic src="https://via.placeholder.com/100" />
@@ -73,7 +73,7 @@ _API is so simple that you don't even need documentation, take a look at HTML ex
 	</script>
 </body>
 ```
-_Alternatively, you can use a bundlers like [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) or [Parcel](https://parceljs.org/):_
+Alternatively, you can use a bundlers like [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) or [Parcel](https://parceljs.org/):
 ```javascript
 import Zoomtastic from 'zoomtastic';
 
@@ -85,6 +85,16 @@ Zoomtastic.show('https://via.placeholder.com/600');
 
 // Hide image viewer
 Zoomtastic.hide();
+```
+
+Or you can import module using [Skypack](https://www.skypack.dev/):
+```html
+<script type="module">
+	import Zoomtastic from 'https://cdn.skypack.dev/zoomtastic@2.0';
+
+	// Mount viewer elements
+	Zoomtastic.mount();
+</script>
 ```
 
 <br>
