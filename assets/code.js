@@ -1,4 +1,5 @@
-Zoomtastic.listen('zoomtastic');
+Zoomtastic.mount();
+Zoomtastic.listen('[zoomtastic]', 'zoomtastic');
 
 // Preload full-sized images
 var images = ['image1.png', 'image2.png', 'image3.jpg'];
