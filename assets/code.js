@@ -27,7 +27,7 @@ zoomButton.addEventListener('click', () => {
 dropButton.addEventListener('click', () => {
 	unclickButtons();
 	dropButton.classList.add('active');
-	Zoomtastic.mount({ animation: 'drops' });
+	Zoomtastic.mount({ animation: 'drop' });
 });
 
 function unclickButtons() {
