@@ -35,7 +35,7 @@ declare namespace Zoomtastic {
      */
     function mount(config?: ZoomtasticConfig): void;
     /**
-     * Add event listener to the elements. By default, it listens to all elements with the attribute _zoomtastic_ and takes the image from the _src_ attribute.
+     * Add event listener to the elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute.
      * @param {string|HTMLElement|HTMLCollection|NodeList} [target='[zoomtastic]'] CSS selector, element or array of elements.
      * @param {string} [source='src'] Image source.
      */

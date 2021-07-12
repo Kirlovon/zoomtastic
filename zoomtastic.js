@@ -1,6 +1,9 @@
 // Initialization status
 let mounted = false;
 
+// Locking clicking on images
+let locked = false;
+
 // Elements
 let container;
 let background;
@@ -32,7 +35,7 @@ Zoomtastic.mount = function(config = {}) {
 
 	Zoomtastic.config.size = config.size || '95%';
 	Zoomtastic.config.easing = config.easing || 'ease';
-	Zoomtastic.config.duration = config.duration || 200;
+	Zoomtastic.config.duration = config.duration || 500;
 	Zoomtastic.config.background = config.background || 'rgba(0, 0, 0, 0.9)';
 	Zoomtastic.config.filter = config.filter || 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))';
 	Zoomtastic.config.animation = config.animation || 'slide';
@@ -59,7 +62,7 @@ Zoomtastic.mount = function(config = {}) {
 		background: Zoomtastic.config.background,
 		transitionProperty: 'opacity',
 		transitionTimingFunction: Zoomtastic.config.easing,
-		transitionDuration: parseInt(Zoomtastic.config.duration) + 'ms',
+		transitionDuration: parseInt(Zoomtastic.config.duration * 0.75) + 'ms',
 	});
 
 	image = createElement('zoomtastic-image', {
@@ -86,11 +89,17 @@ Zoomtastic.mount = function(config = {}) {
 	if (Zoomtastic.config.animation === 'zoom') image.style.transform = 'translate(-50%, -50%) scale(0.95)';
 	if (Zoomtastic.config.animation === 'drop') image.style.transform = 'translate(-50%, -50%) scale(1.1)';
 
-	container.addEventListener('click', () => Zoomtastic.hide());
+	container.addEventListener('click', () => {
+		if (locked) return;
+		locked = true;
+		Zoomtastic.hide();
+	});
+
 	container.appendChild(image);
 	container.appendChild(background);
 	document.body.appendChild(container);
 
+	locked = false;
 	mounted = true;
 };
 
@@ -136,6 +145,7 @@ Zoomtastic.show = function(url) {
 
 		image.style.opacity = '1';
 		background.style.opacity = '1';
+		locked = false;
 	});
 };
 
@@ -157,6 +167,7 @@ Zoomtastic.hide = function() {
 	setTimeout(() => {
 		image.style.backgroundImage = 'none';
 		container.style.visibility = 'hidden';
+		locked = false;
 	}, parseInt(Zoomtastic.config.duration));
 };
 
