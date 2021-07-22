@@ -181,7 +181,7 @@ main {
 	.images {
 		flex-direction: column;
 		margin: 0;
-		margin-top: 64px;
+		margin-top: 48px;
 	}
 
 	.image1,
@@ -206,4 +206,26 @@ main {
 	.info {
 		letter-spacing: 0px;
 	}
+}
+
+
+@media (max-width: 500px) {
+	.bottom {
+		flex-direction: column;
+	}
+
+	.images {
+		margin-top: 32px;
+	}
+
+	.switcher {
+		font-size: 14px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		justify-content: center;
+	}
+	.info {
+		text-align: center;
+	}
+
 }
