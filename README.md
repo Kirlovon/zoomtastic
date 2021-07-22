@@ -19,6 +19,7 @@
 ## Features
 - 📊 Lightweight _(Around ***1.5kb*** gzipped)_
 - 🥂 Short and simple API
+- 🎬 Different animations
 - 📦 No dependencies
 - 🌐 IE11 Support
 
@@ -62,7 +63,7 @@ API is so simple that you don't even need documentation, take a look at HTML exa
 		});
 
 		// Listen for an elements that contains "zoomtastic" attribute, and use "src" attribute as image source
-		Zoomtastic.listen('[zoomtastic]', 'zoomtastic');
+		Zoomtastic.listen('[zoomtastic]', 'src');
 
 		// Show image manually
 		Zoomtastic.show('https://via.placeholder.com/600');
@@ -116,6 +117,7 @@ The configuration is optional, and has these parameters:
  Add click event listener to the image elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute. 
 
 The **target** should be a CSS selector, an element or an array of elements.
+
 The **source** argument must be the name of the attribute from which URL to the image will be taken.
 
 ### Zoomtastic.show(_url_)
