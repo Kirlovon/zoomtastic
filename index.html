@@ -6,45 +6,64 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Zoomtastic</title>
 	<link rel="shortcut icon" href="./assets/favicon.png" type="image/png" />
+	<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/github.min.css">
 	<link rel="stylesheet" href="./assets/normalize.css" />
 	<link rel="stylesheet" href="./assets/skeleton.css" />
 	<link rel="stylesheet" href="./assets/styles.css" />
-
 </head>
 
 <body>
 	<main>
-		<div class="container">
-			<div class="links">
-				<a class="link" href="https://github.com/Kirlovon/Zoomtastic">GitHub</a>
-				<span>/</span>
-				<a class="link" href="https://www.npmjs.com/package/zoomtastic">NPM</a>
-			</div>
 
-			<div class="logo" src="./assets/logo.png"></div>
-			<h1 class="title">Zoomtastic</h1>
-			<i class="description">Tiny image zoomer for web!</i>
-
-			<div class="images">
-				<div zoomtastic="./assets/image1.png" class="image1"></div>
-				<div zoomtastic="./assets/image2.png" class="image2"></div>
-				<div zoomtastic="./assets/image3.jpg" class="image3"></div>
-				<img src="./assets/message.svg" class="message"></img>
-			</div>
-
-			<div class="bottom">
-				<div class="switcher">
-					<div id="slide" class="animation-button active">Slide</div>
-					<div id="fade" class="animation-button">Fade</div>
-					<div id="zoom" class="animation-button">Zoom</div>
-					<div id="drop" class="animation-button">Drop</div>
+		<header>
+			<div class="container">
+				<div class="links">
+					<a class="link" href="https://github.com/Kirlovon/Zoomtastic">GitHub</a>
+					<span>/</span>
+					<a class="link" href="https://www.npmjs.com/package/zoomtastic">NPM</a>
 				</div>
-				<div class="info">Illustrations made by <a href="https://dribbble.com/painterr">Dzmitry Kazak</a></div>
-			</div>
 
-		</div>
+				<div class="logo" src="./assets/logo.png"></div>
+				<h1 class="title">Zoomtastic</h1>
+				<i class="description">Tiny image zoomer for web!</i>
+
+				<div class="images">
+					<div zoomtastic="./assets/image1.png" class="image1"></div>
+					<div zoomtastic="./assets/image2.png" class="image2"></div>
+					<div zoomtastic="./assets/image3.jpg" class="image3"></div>
+					<img src="./assets/message.svg" class="message"></img>
+				</div>
+
+				<div class="bottom">
+					<div class="switcher">
+						<div id="slide" class="animation-button active">Slide</div>
+						<div id="fade" class="animation-button">Fade</div>
+						<div id="zoom" class="animation-button">Zoom</div>
+						<div id="drop" class="animation-button">Drop</div>
+					</div>
+					<div class="info">Illustrations made by <a href="https://dribbble.com/painterr">Dzmitry Kazak</a></div>
+				</div>
+			</div>
+		</header>
+
+		<section class="example">
+			<div class="container">
+				<h2>You don't even need documentation!</h2>
+				<p>Take a look at this example: It contains everything you could possibly need.</p>
+
+				<code id="code-example"></code>
+				<p>More information you can find on the project's <a href="https://github.com/Kirlovon/Zoomtastic">Github</a></p>
+			</div>
+		</section>
+
+		<footer>
+			<div class="container">
+				Made with ♥ by  <a href="https://github.com/Kirlovon">Kirill Reunov</a> | Zoomtastic is under the <a href="https://github.com/Kirlovon/Zoomtastic/blob/master/LICENSE">MIT License</a>
+			</div>
+		</footer>
 	</main>
 
+	<script src="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/highlight.min.js"></script>
 	<script src="https://unpkg.com/zoomtastic@2.1.0"></script>
 	<script src="./assets/code.js"></script>
 </body>
