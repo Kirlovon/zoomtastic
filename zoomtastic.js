@@ -10,7 +10,7 @@ let background;
 let image;
 
 /**
- * @typedef {object} ZoomtasticConfig Zoomtastic configuration
+ * @typedef {object} ZoomtasticConfig Zoomtastic configuration.
  * @property {string} [size] Image size.
  * @property {string} [ease] Timing function.
  * @property {number} [duration] Animations duration.
@@ -27,7 +27,7 @@ const Zoomtastic = { config: {} };
 
 /**
  * Mount Zoomtastic element to the page.
- * @param {ZoomtasticConfig} config Zoomtastic configuration
+ * @param {ZoomtasticConfig} config Zoomtastic configuration.
  */
 Zoomtastic.mount = function(config = {}) {
 	const existingContainer = document.getElementById('zoomtastic-container');
@@ -35,7 +35,7 @@ Zoomtastic.mount = function(config = {}) {
 
 	Zoomtastic.config.size = config.size || '95%';
 	Zoomtastic.config.easing = config.easing || 'ease';
-	Zoomtastic.config.duration = config.duration || 500;
+	Zoomtastic.config.duration = config.duration || 300;
 	Zoomtastic.config.background = config.background || 'rgba(0, 0, 0, 0.9)';
 	Zoomtastic.config.filter = config.filter || 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))';
 	Zoomtastic.config.animation = config.animation || 'slide';
@@ -104,16 +104,16 @@ Zoomtastic.mount = function(config = {}) {
 };
 
 /**
- * Add event listener to the elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute. 
- * @param {string|HTMLElement|HTMLCollection|NodeList} [target='[zoomtastic]'] CSS selector, element or array of elements. 
+ * Add event listener to the elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute.
+ * @param {string|HTMLElement|HTMLCollection|NodeList} [target='[zoomtastic]'] CSS selector, element or array of elements.
  * @param {string} [source='src'] Image source.
  */
 Zoomtastic.listen = function(target = '[zoomtastic]', source = 'src') {
-	if (!mounted) throw new Error('Zoomtastic is not mounted');
+	if (!mounted) Zoomtastic.mount();
 
 	if (typeof target === 'string') target = document.querySelectorAll(target);
 	if (target instanceof HTMLElement) target = [target];
-    if (!target) return;
+	if (!target) return;
 
 	for (let i = 0; i < target.length; i++) {
 		const element = target[i];
@@ -133,8 +133,8 @@ Zoomtastic.listen = function(target = '[zoomtastic]', source = 'src') {
  * @param {string} url URL to the image.
  */
 Zoomtastic.show = function(url) {
-	if (!mounted) throw new Error('Zoomtastic is not mounted');
 	if (!url) throw new TypeError('URL is not specified');
+	if (!mounted) Zoomtastic.mount();
 
 	image.style.backgroundImage = `url("${encodeURI(url)}")`;
 	container.style.visibility = 'visible';
@@ -153,7 +153,7 @@ Zoomtastic.show = function(url) {
  * Hide image viewer.
  */
 Zoomtastic.hide = function() {
-	if (!mounted) throw new Error('Zoomtastic is not mounted');
+	if (!mounted) Zoomtastic.mount();
 
 	setTimeout(() => {
 		if (Zoomtastic.config.animation === 'slide') image.style.transform = 'translate(-50%, -45%) scale(1)';

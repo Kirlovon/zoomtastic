@@ -17,7 +17,7 @@
 </p>
 
 ## Features
-- 📊 Lightweight _(Around ***1.5kb*** gzipped)_
+- 📊 Lightweight _(***1.27kb*** gzipped)_
 - 🥂 Short and simple API
 - 🎬 Different animations
 - 📦 No dependencies
@@ -36,7 +36,7 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic@2.1.0"></script>
+<script src="https://unpkg.com/zoomtastic@2.2.0"></script>
 ```
 
 <br>
@@ -52,11 +52,11 @@ API is so simple that you don't even need documentation, take a look at HTML exa
 	<script src="https://unpkg.com/zoomtastic"></script>
 	<script>
 
-		// Mount viewer elements
+		// Mount viewer element
 		Zoomtastic.mount({
 			size: '95%',
 			easing: 'ease',
-			duration: 500,
+			duration: 300,
 			background: 'rgba(0, 0, 0, 0.9)',
 			filter: 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))',
 			animation: 'slide' // Can be slide, fade, zoom or drop
@@ -82,7 +82,7 @@ import Zoomtastic from 'zoomtastic';
 Zoomtastic.mount();
 
 // Show image viewer manually
-Zoomtastic.show('https://via.placeholder.com/600');
+Zoomtastic.show('https://via.placeholder.com/256');
 
 // Hide image viewer
 Zoomtastic.hide();
@@ -91,7 +91,7 @@ Zoomtastic.hide();
 Or you can import module using [Skypack](https://www.skypack.dev/):
 ```html
 <script type="module">
-	import Zoomtastic from 'https://cdn.skypack.dev/zoomtastic@2.1.0';
+	import Zoomtastic from 'https://cdn.skypack.dev/zoomtastic@2.2.0';
 
 	// Mount viewer elements
 	Zoomtastic.mount();
@@ -108,13 +108,13 @@ This function creates and mounts to the page the necessary Zoomtastic elements. 
 The configuration is optional, and has these parameters:
 * **size** - Image size. _(Default: `95%`)_
 * **ease** - Timing function. _(Default: `ease`)_
-* **duration** - Animations duration. _(Default: `500`)_
+* **duration** - Animations duration. _(Default: `300`)_
 * **background** - Viewer background. _(Default: `rgba(0, 0, 0, 0.9)`)_
 * **filter** - CSS filter applied to image. _(Default: `drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))`)_
 * **animation** - Animation type. Can be `slide`, `fade`, `zoom` or `drop`. _(Default: `slide`)_ 
 
 ### Zoomtastic.listen(_target_, _source_)
- Add click event listener to the image elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute. 
+Add click event listener to the image elements. By default, it listens to all elements with the attribute `zoomtastic` and takes the image from the `src` attribute. 
 
 The **target** should be a CSS selector, an element or an array of elements.
 

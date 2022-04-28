@@ -1,6 +1,6 @@
 export default Zoomtastic;
 /**
- * Zoomtastic configuration
+ * Zoomtastic configuration.
  */
 export type ZoomtasticConfig = {
     /**
@@ -31,7 +31,7 @@ export type ZoomtasticConfig = {
 declare namespace Zoomtastic {
     /**
      * Mount Zoomtastic element to the page.
-     * @param {ZoomtasticConfig} config Zoomtastic configuration
+     * @param {ZoomtasticConfig} config Zoomtastic configuration.
      */
     function mount(config?: ZoomtasticConfig): void;
     /**

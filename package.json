@@ -1,6 +1,6 @@
 {
 	"name": "zoomtastic",
-	"version": "2.1.1",
+	"version": "2.2.0",
 	"description": "Tiny image zoomer for web!",
 	"repository": "https://github.com/Kirlovon/Zoomtastic.git",
 	"homepage": "https://github.com/Kirlovon/Zoomtastic",
@@ -18,33 +18,19 @@
 	"main": "./dist/zoomtastic.umd.js",
 	"exports": "./dist/zoomtastic.umd.js",
 	"types": "./dist/zoomtastic.d.ts",
-	"module": "./dist/zoomtastic.umd.js",
+	"module": "./dist/zoomtastic.es.js",
 	"scripts": {
-		"build": "webpack --env.production",
-		"types": "tsc zoomtastic.js --declaration --allowJs --emitDeclarationOnly --stripInternal --outDir dist",
-		"dev": "webpack --env.development"
+		"build": "run-s build:*",
+		"build:dist": "vite build",
+		"build:types": "tsc zoomtastic.js --declaration --allowJs --emitDeclarationOnly --stripInternal --outDir dist"
 	},
 	"files": [
 		"dist/",
-		"types/",
 		"LICENSE"
 	],
-	"prettier": {
-		"trailingComma": "es5",
-		"printWidth": 200,
-		"tabWidth": 4,
-		"useTabs": true,
-		"semi": true,
-		"singleQuote": true
-	},
 	"devDependencies": {
-		"@babel/core": "^7.11.6",
-		"@babel/preset-env": "^7.11.5",
-		"babel-loader": "^8.1.0",
-		"eslint": "^7.30.0",
-		"prettier": "^1.19.1",
+		"eslint": "^8.14.0",
 		"typescript": "^4.0.2",
-		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12"
+		"vite": "^2.9.6"
 	}
 }
