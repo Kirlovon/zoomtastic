@@ -1,6 +1,4 @@
-const DURATION = 300;
-
-Zoomtastic.mount({ animation: 'slide', duration: DURATION });
+Zoomtastic.mount({ animation: 'slide' });
 Zoomtastic.listen('[zoomtastic]', 'zoomtastic');
 
 var slideButton = document.getElementById('slide');
@@ -11,25 +9,25 @@ var dropButton = document.getElementById('drop');
 slideButton.addEventListener('click', () => {
 	unclickButtons();
 	slideButton.classList.add('active');
-	Zoomtastic.mount({ animation: 'slide', duration: DURATION });
+	Zoomtastic.mount({ animation: 'slide' });
 });
 
 fadeButton.addEventListener('click', () => {
 	unclickButtons();
 	fadeButton.classList.add('active');
-	Zoomtastic.mount({ animation: 'fade', duration: DURATION });
+	Zoomtastic.mount({ animation: 'fade' });
 });
 
 zoomButton.addEventListener('click', () => {
 	unclickButtons();
 	zoomButton.classList.add('active');
-	Zoomtastic.mount({ animation: 'zoom', duration: DURATION });
+	Zoomtastic.mount({ animation: 'zoom' });
 });
 
 dropButton.addEventListener('click', () => {
 	unclickButtons();
 	dropButton.classList.add('active');
-	Zoomtastic.mount({ animation: 'drop', duration: DURATION });
+	Zoomtastic.mount({ animation: 'drop' });
 });
 
 function unclickButtons() {
@@ -44,7 +42,7 @@ const codeExample = `
 <img zoomtastic src="https://via.placeholder.com/256" />
 
 <!-- Load Zoomtastic from the CDN! -->
-<script src="https://unpkg.com/zoomtastic@2.1.0"></script>
+<script src="https://unpkg.com/zoomtastic@2.2.0"></script>
 
 <script>
 
