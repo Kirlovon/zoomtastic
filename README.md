@@ -74,7 +74,7 @@ API is so simple that you don't even need documentation, take a look at HTML exa
 	</script>
 </body>
 ```
-Alternatively, you can use a bundlers like [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/) or [Parcel](https://parceljs.org/):
+Alternatively, you can use a bundlers like [Webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org/), [Parcel](https://parceljs.org/) or [Vite](https://vitejs.dev/):
 ```javascript
 import Zoomtastic from 'zoomtastic';
 
