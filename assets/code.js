@@ -1,10 +1,14 @@
+// Initiate Zoomtastic
+
 Zoomtastic.mount({ animation: 'slide' });
 Zoomtastic.listen('[zoomtastic]', 'zoomtastic');
 
-var slideButton = document.getElementById('slide');
-var fadeButton = document.getElementById('fade');
-var zoomButton = document.getElementById('zoom');
-var dropButton = document.getElementById('drop');
+// Animation elements
+
+const slideButton = document.getElementById('slide');
+const fadeButton = document.getElementById('fade');
+const zoomButton = document.getElementById('zoom');
+const dropButton = document.getElementById('drop');
 
 slideButton.addEventListener('click', () => {
 	unclickButtons();
@@ -36,6 +40,8 @@ function unclickButtons() {
 	zoomButton.classList.remove('active');
 	dropButton.classList.remove('active');
 }
+
+// Example block
 
 const codeExample = `
 <!-- Add Zoomtastic attribute to zoomable elements! -->
@@ -71,3 +77,13 @@ const codeExample = `
 
 const renderedExample = hljs.highlight(codeExample.trim(), { language: 'xml' }).value
 document.getElementById('code-example').innerHTML = renderedExample;
+
+// Preload full-sized images
+
+setTimeout(() => {
+	const images = ['image1.png', 'image2.png', 'image3.jpg'];
+	for (let i = 0; i < images.length; i++) {
+		const image = new Image();
+		image.src = './assets/' + images[i];
+	}
+}, 200);
