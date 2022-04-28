@@ -6,15 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Zoomtastic</title>
 	<link rel="shortcut icon" href="./assets/favicon.png" type="image/png" />
-	<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/github.min.css">
-	<link rel="stylesheet" href="./assets/normalize.css" />
-	<link rel="stylesheet" href="./assets/skeleton.css" />
+	<link rel="stylesheet" href="./vendor/github.min.css">
+	<link rel="stylesheet" href="./vendor/normalize.css" />
+	<link rel="stylesheet" href="./vendor/skeleton.css" />
 	<link rel="stylesheet" href="./assets/styles.css" />
 </head>
 
 <body>
 	<main>
 
+		<!-- Header -->
 		<header>
 			<div class="container">
 				<div class="links">
@@ -46,25 +47,28 @@
 			</div>
 		</header>
 
+		<!-- Example -->
 		<section class="example">
 			<div class="container">
-				<h2>You don't even need documentation!</h2>
+				<h2 data-sal="slide-up">You don't even need documentation!</h2>
 				<p>Take a look at this example: It contains everything you could possibly need.</p>
 
-				<code id="code-example"></code>
-				<p>More information you can find on the project's <a href="https://github.com/Kirlovon/Zoomtastic">Github</a></p>
+				<code id="code-example" data-sal="slide-up"></code>
+				<p>More information can be found on the project's <a href="https://github.com/Kirlovon/Zoomtastic">Github</a></p>
 			</div>
 		</section>
 
+		<!-- Footer -->
 		<footer>
 			<div class="container">
 				Made with ♥ by  <a href="https://github.com/Kirlovon">Kirill Reunov</a> | Zoomtastic is under the <a href="https://github.com/Kirlovon/Zoomtastic/blob/master/LICENSE">MIT License</a>
 			</div>
 		</footer>
+		
 	</main>
 
-	<script src="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/highlight.min.js"></script>
-	<script src="https://unpkg.com/zoomtastic@2.1.0"></script>
+	<script src="./vendor/highlight.min.js"></script>
+	<script src="./vendor/zoomtastic.umd.js"></script>
 	<script src="./assets/code.js"></script>
 </body>
 

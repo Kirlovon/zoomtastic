@@ -24,6 +24,7 @@ code {
 	display: block;
 	color: black;
 	overflow-x: auto;
+	border-radius: 8px;
 	padding: 32px;
 	font-size: 13px;
 	white-space: pre;
@@ -36,7 +37,7 @@ code {
 footer {
 	width: 100%;
 	height: auto;
-	font-size: 10px;
+	font-size: 11px;
 	padding-top: 32px;
 	padding-bottom: 64px;
 	letter-spacing: 1px;
@@ -47,7 +48,7 @@ footer {
 }
 
 a {
-	color: black;
+	color: inherit;
 	font-weight: bold;
 	text-underline-offset: 2px;
 }
@@ -144,7 +145,8 @@ a:hover {
 		0 4px #fff,
 		-4px 0 #fff,
 		4px 0 #fff,
-		-2px -3px #fff;
+		-2px -3px #fff,
+		2px -3px #fff;
 }
 
 .description {
@@ -266,14 +268,6 @@ a:hover {
 		padding: 48px 0;
 	}
 
-	.example h2 {
-		font-size: 28px;
-	}
-	
-	.example p {
-		font-size: 13px;
-	}	
-
 	.message {
 		display: none;
 	}
@@ -314,14 +308,6 @@ a:hover {
 		padding: 8px;
 		font-size: 8px;
 	}
-
-	.example h2 {
-		font-size: 16px;
-	}
-	
-	.example p {
-		font-size: 11px;
-	}	
 
 	.bottom {
 		flex-direction: column;

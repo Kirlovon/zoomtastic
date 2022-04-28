@@ -48,7 +48,7 @@ const codeExample = `
 
 <script>
 
-	// Mount viewer elements
+	// Mount viewer element
 	Zoomtastic.mount({
 		size: '95%',
 		easing: 'ease',
@@ -58,15 +58,15 @@ const codeExample = `
 		animation: 'slide' // Can be slide, fade, zoom or drop
 	});
 
+	// Listen for an elements that contains "zoomtastic" attribute, 
+	// and use "src" attribute as image source
+	Zoomtastic.listen('[zoomtastic]', 'src');
+
 	// Show image manually
 	Zoomtastic.show('https://via.placeholder.com/256');
 
 	// Hide image
 	Zoomtastic.hide();
-
-	// Listen for an elements that contains "zoomtastic" attribute, 
-	// and use "src" attribute as image source
-	Zoomtastic.listen('[zoomtastic]', 'src');
 
 </script>
 `;
