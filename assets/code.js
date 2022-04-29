@@ -48,7 +48,7 @@ const codeExample = `
 <img zoomtastic src="https://via.placeholder.com/256" />
 
 <!-- Load Zoomtastic from the CDN! -->
-<script src="https://unpkg.com/zoomtastic@2.2.0"></script>
+<script src="https://unpkg.com/zoomtastic@2.2.1"></script>
 
 <script>
 
