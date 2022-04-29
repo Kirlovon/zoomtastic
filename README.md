@@ -17,7 +17,7 @@
 </p>
 
 ## Features
-- 📊 Lightweight _(***1.27kb*** gzipped)_
+- 📊 Lightweight _(***1.16kb*** gzipped)_
 - 🥂 Short and simple API
 - 🎬 Different animations
 - 📦 No dependencies
@@ -35,7 +35,7 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic@2.2.0"></script>
+<script src="https://unpkg.com/zoomtastic@2.2.1"></script>
 ```
 
 <br>
@@ -90,7 +90,7 @@ Zoomtastic.hide();
 Or you can import module using [Skypack](https://www.skypack.dev/):
 ```html
 <script type="module">
-	import Zoomtastic from 'https://cdn.skypack.dev/zoomtastic@2.2.0';
+	import Zoomtastic from 'https://cdn.skypack.dev/zoomtastic';
 
 	// Mount viewer elements
 	Zoomtastic.mount();
