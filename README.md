@@ -21,7 +21,6 @@
 - 🥂 Short and simple API
 - 🎬 Different animations
 - 📦 No dependencies
-- 🌐 IE11 Support
 
 <br>
 

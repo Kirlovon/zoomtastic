@@ -1,9 +1,10 @@
-const path = require('path');
-const { defineConfig } = require('vite');
+import path from 'path';
+import { defineConfig } from 'vite';
 
-module.exports = defineConfig({
+export default defineConfig({
     build: {
         minify: 'terser',
+        target: 'es2015',
         sourcemap: true,
         emptyOutDir: false,
         reportCompressedSize: true,
