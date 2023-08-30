@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">Zoomtastic Page</h3>
-<p align="center"><i>Website for tiny image zoomer!</i></p>
+<p align="center"><i>Website for tiny image viewer!</i></p>
 
 <p align="center">
 	<img src="https://img.shields.io/github/license/Kirlovon/Zoomtastic.svg" alt="License">
