@@ -42,6 +42,7 @@ Zoomtastic.mount = function(config = {}) {
     left: "50%",
     width: Zoomtastic.config.size,
     height: Zoomtastic.config.size,
+    maxHeight: "dvh100",
     opacity: "0",
     zIndex: "16777271",
     userSelect: "none",

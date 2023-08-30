@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     build: {
-        minify: 'terser',
+        minify: 'esbuild',
         target: 'es2015',
         sourcemap: true,
         emptyOutDir: false,

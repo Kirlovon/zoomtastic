@@ -29,7 +29,7 @@ const Zoomtastic = { config: {} };
  * Mount Zoomtastic element to the page.
  * @param {ZoomtasticConfig} config Zoomtastic configuration.
  */
-Zoomtastic.mount = function(config = {}) {
+Zoomtastic.mount = function (config = {}) {
 	const existingContainer = document.getElementById('zoomtastic-container');
 	if (existingContainer) existingContainer.remove();
 
@@ -70,6 +70,7 @@ Zoomtastic.mount = function(config = {}) {
 		left: '50%',
 		width: Zoomtastic.config.size,
 		height: Zoomtastic.config.size,
+		maxHeight: 'dvh100',
 		opacity: '0',
 		zIndex: '16777271',
 		userSelect: 'none',
@@ -108,7 +109,7 @@ Zoomtastic.mount = function(config = {}) {
  * @param {string|HTMLElement|HTMLCollection|NodeList} [target='[zoomtastic]'] CSS selector, element or array of elements.
  * @param {string} [source='src'] Image source.
  */
-Zoomtastic.listen = function(target = '[zoomtastic]', source = 'src') {
+Zoomtastic.listen = function (target = '[zoomtastic]', source = 'src') {
 	if (!mounted) Zoomtastic.mount();
 
 	if (typeof target === 'string') target = document.querySelectorAll(target);
@@ -132,7 +133,7 @@ Zoomtastic.listen = function(target = '[zoomtastic]', source = 'src') {
  * Show image viewer.
  * @param {string} url URL to the image.
  */
-Zoomtastic.show = function(url) {
+Zoomtastic.show = function (url) {
 	if (!url) throw new TypeError('URL is not specified');
 	if (!mounted) Zoomtastic.mount();
 
@@ -152,7 +153,7 @@ Zoomtastic.show = function(url) {
 /**
  * Hide image viewer.
  */
-Zoomtastic.hide = function() {
+Zoomtastic.hide = function () {
 	if (!mounted) Zoomtastic.mount();
 
 	setTimeout(() => {

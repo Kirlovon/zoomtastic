@@ -1,9 +1,9 @@
 {
 	"name": "zoomtastic",
-	"version": "2.2.1",
-	"description": "Tiny image zoomer for web!",
-	"repository": "https://github.com/Kirlovon/Zoomtastic.git",
-	"homepage": "https://github.com/Kirlovon/Zoomtastic",
+	"version": "2.3.0",
+	"description": "Tiny image viewer for web!",
+	"repository": "https://github.com/Kirlovon/zoomtastic.git",
+	"homepage": "https://github.com/Kirlovon/zoomtastic",
 	"author": "Kirlovon",
 	"keywords": [
 		"javascript",
@@ -30,9 +30,9 @@
 		"LICENSE"
 	],
 	"devDependencies": {
-		"eslint": "^8.14.0",
+		"eslint": "^8.48.0",
 		"npm-run-all": "^4.1.5",
-		"typescript": "^4.0.2",
-		"vite": "^2.9.6"
+		"typescript": "^5.2.2",
+		"vite": "^4.4.9"
 	}
 }
