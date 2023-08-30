@@ -21,7 +21,7 @@ let image;
 
 /**
  * Zoomtastic 🔍
- * Tiny image zoomer for web!
+ * Tiny image viewer for web!
  */
 const Zoomtastic = { config: {} };
 

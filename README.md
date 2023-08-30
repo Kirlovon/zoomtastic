@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">Zoomtastic</h3>
-<p align="center"><i>Tiny image zoomer for web!</i></p>
+<p align="center"><i>Tiny image viewer for web!</i></p>
 
 <p align="center">
 	<img src="https://img.shields.io/github/license/Kirlovon/Zoomtastic.svg" alt="License">
@@ -35,7 +35,7 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic@2.2.1"></script>
+<script src="https://unpkg.com/zoomtastic@2.3.0"></script>
 ```
 
 <br>
