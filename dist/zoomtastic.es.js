@@ -19,17 +19,20 @@ Zoomtastic.mount = function(config = {}) {
     left: "0",
     width: "100%",
     height: "100vh",
+    display: "flex",
     position: "fixed",
-    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
+    maxHeight: "100dvh",
     cursor: "zoom-out",
     zIndex: "16777271",
     visibility: "hidden"
   });
   background = createElement("zoomtastic-background", {
-    zIndex: "0",
-    opacity: "0",
     width: "100%",
     height: "100%",
+    zIndex: "0",
+    opacity: "0",
     userSelect: "none",
     position: "absolute",
     background: Zoomtastic.config.background,
@@ -38,15 +41,11 @@ Zoomtastic.mount = function(config = {}) {
     transitionDuration: parseInt(Zoomtastic.config.duration * 0.75) + "ms"
   });
   image = createElement("zoomtastic-image", {
-    top: "50%",
-    left: "50%",
     width: Zoomtastic.config.size,
     height: Zoomtastic.config.size,
-    maxHeight: "dvh100",
     opacity: "0",
     zIndex: "16777271",
     userSelect: "none",
-    position: "absolute",
     pointerEvents: "none",
     backgroundSize: "contain",
     backgroundPosition: "center",
@@ -54,15 +53,15 @@ Zoomtastic.mount = function(config = {}) {
     transitionProperty: "all",
     transitionTimingFunction: Zoomtastic.config.easing,
     transitionDuration: parseInt(Zoomtastic.config.duration) + "ms",
-    transform: "translate(-50%, -50%) scale(1)",
+    transform: "translateY(0) scale(1)",
     filter: Zoomtastic.config.filter
   });
   if (Zoomtastic.config.animation === "slide")
-    image.style.transform = "translate(-50%, -45%) scale(1)";
+    image.style.transform = "translateY(5%) scale(1)";
   if (Zoomtastic.config.animation === "zoom")
-    image.style.transform = "translate(-50%, -50%) scale(0.95)";
+    image.style.transform = "scale(0.95)";
   if (Zoomtastic.config.animation === "drop")
-    image.style.transform = "translate(-50%, -50%) scale(1.1)";
+    image.style.transform = "scale(1.1)";
   container.addEventListener("click", () => {
     if (locked)
       return;
@@ -104,9 +103,9 @@ Zoomtastic.show = function(url) {
   container.style.visibility = "visible";
   setTimeout(() => {
     if (Zoomtastic.config.animation === "slide")
-      image.style.transform = "translate(-50%, -50%) scale(1)";
+      image.style.transform = "translateY(0) scale(1)";
     if (Zoomtastic.config.animation === "zoom" || Zoomtastic.config.animation === "drop")
-      image.style.transform = "translate(-50%, -50%) scale(1)";
+      image.style.transform = "translateY(0) scale(1)";
     image.style.opacity = "1";
     background.style.opacity = "1";
     locked = false;
@@ -117,11 +116,11 @@ Zoomtastic.hide = function() {
     Zoomtastic.mount();
   setTimeout(() => {
     if (Zoomtastic.config.animation === "slide")
-      image.style.transform = "translate(-50%, -45%) scale(1)";
+      image.style.transform = "translateY(5%) scale(1)";
     if (Zoomtastic.config.animation === "zoom")
-      image.style.transform = "translate(-50%, -50%) scale(0.95)";
+      image.style.transform = "translateY(0) scale(0.95)";
     if (Zoomtastic.config.animation === "drop")
-      image.style.transform = "translate(-50%, -50%) scale(1.1)";
+      image.style.transform = "translateY(0) scale(1.1)";
     image.style.opacity = "0";
     background.style.opacity = "0";
   });

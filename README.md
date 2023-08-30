@@ -17,7 +17,7 @@
 </p>
 
 ## Features
-- 📊 Lightweight _(***1.16kb*** gzipped)_
+- 📊 Lightweight _(***1.2kb*** gzipped)_
 - 🥂 Short and simple API
 - 🎬 Different animations
 - 📦 No dependencies
@@ -35,7 +35,7 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic@2.3.0"></script>
+<script src="https://unpkg.com/zoomtastic@2.3.1"></script>
 ```
 
 <br>

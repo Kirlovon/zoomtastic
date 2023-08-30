@@ -1,6 +1,6 @@
 {
 	"name": "zoomtastic",
-	"version": "2.3.0",
+	"version": "2.3.1",
 	"description": "Tiny image viewer for web!",
 	"repository": "https://github.com/Kirlovon/zoomtastic.git",
 	"homepage": "https://github.com/Kirlovon/zoomtastic",
@@ -12,7 +12,7 @@
 		"browser",
 		"image",
 		"image-viewer",
-		"webpack"
+		"vite"
 	],
 	"license": "MIT",
 	"main": "./dist/zoomtastic.umd.js",
