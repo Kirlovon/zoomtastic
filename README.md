@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://kirlovon.github.io/Zoomtastic/">🔎 Demo</a>
+  <a href="https://kirlovon.github.io/zoomtastic/">🔎 Demo</a>
 </p>
 
 ## Features
