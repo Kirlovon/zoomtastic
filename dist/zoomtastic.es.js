@@ -1,24 +1,12 @@
-let mounted = false;
-let locked = false;
-let container;
-let background;
-let image;
-const Zoomtastic = { config: {} };
-Zoomtastic.mount = function(config = {}) {
-  const existingContainer = document.getElementById("zoomtastic-container");
-  if (existingContainer)
-    existingContainer.remove();
-  Zoomtastic.config.size = config.size || "95%";
-  Zoomtastic.config.easing = config.easing || "ease";
-  Zoomtastic.config.duration = config.duration || 300;
-  Zoomtastic.config.background = config.background || "rgba(0, 0, 0, 0.9)";
-  Zoomtastic.config.filter = config.filter || "drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))";
-  Zoomtastic.config.animation = config.animation || "slide";
-  container = createElement("zoomtastic-container", {
+let l = !1, r = !1, a, c, t;
+const n = { config: {} };
+n.mount = function(i = {}) {
+  const e = document.getElementById("zoomtastic-container");
+  e && e.remove(), n.config.size = i.size || "95%", n.config.easing = i.easing || "ease", n.config.duration = i.duration || 300, n.config.background = i.background || "rgba(0, 0, 0, 0.9)", n.config.filter = i.filter || "drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))", n.config.animation = i.animation || "slide", a = f("zoomtastic-container", {
     top: "0",
     left: "0",
     width: "100%",
-    height: "100vh",
+    height: "100dvh",
     display: "flex",
     position: "fixed",
     alignItems: "center",
@@ -27,22 +15,20 @@ Zoomtastic.mount = function(config = {}) {
     cursor: "zoom-out",
     zIndex: "16777271",
     visibility: "hidden"
-  });
-  background = createElement("zoomtastic-background", {
+  }), c = f("zoomtastic-background", {
     width: "100%",
     height: "100%",
     zIndex: "0",
     opacity: "0",
     userSelect: "none",
     position: "absolute",
-    background: Zoomtastic.config.background,
+    background: n.config.background,
     transitionProperty: "opacity",
-    transitionTimingFunction: Zoomtastic.config.easing,
-    transitionDuration: parseInt(Zoomtastic.config.duration * 0.75) + "ms"
-  });
-  image = createElement("zoomtastic-image", {
-    width: Zoomtastic.config.size,
-    height: Zoomtastic.config.size,
+    transitionTimingFunction: n.config.easing,
+    transitionDuration: parseInt(n.config.duration * 0.75) + "ms"
+  }), t = f("zoomtastic-image", {
+    width: n.config.size,
+    height: n.config.size,
     opacity: "0",
     zIndex: "16777271",
     userSelect: "none",
@@ -51,91 +37,46 @@ Zoomtastic.mount = function(config = {}) {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     transitionProperty: "all",
-    transitionTimingFunction: Zoomtastic.config.easing,
-    transitionDuration: parseInt(Zoomtastic.config.duration) + "ms",
+    transitionTimingFunction: n.config.easing,
+    transitionDuration: parseInt(n.config.duration) + "ms",
     transform: "translateY(0) scale(1)",
-    filter: Zoomtastic.config.filter
-  });
-  if (Zoomtastic.config.animation === "slide")
-    image.style.transform = "translateY(5%) scale(1)";
-  if (Zoomtastic.config.animation === "zoom")
-    image.style.transform = "scale(0.95)";
-  if (Zoomtastic.config.animation === "drop")
-    image.style.transform = "scale(1.1)";
-  container.addEventListener("click", () => {
-    if (locked)
-      return;
-    locked = true;
-    Zoomtastic.hide();
-  });
-  container.appendChild(image);
-  container.appendChild(background);
-  document.body.appendChild(container);
-  locked = false;
-  mounted = true;
+    filter: n.config.filter
+  }), n.config.animation === "slide" && (t.style.transform = "translateY(5%) scale(1)"), n.config.animation === "zoom" && (t.style.transform = "scale(0.95)"), n.config.animation === "drop" && (t.style.transform = "scale(1.1)"), a.addEventListener("click", () => {
+    r || (r = !0, n.hide());
+  }), a.appendChild(t), a.appendChild(c), document.body.appendChild(a), r = !1, l = !0;
 };
-Zoomtastic.listen = function(target = "[zoomtastic]", source = "src") {
-  if (!mounted)
-    Zoomtastic.mount();
-  if (typeof target === "string")
-    target = document.querySelectorAll(target);
-  if (target instanceof HTMLElement)
-    target = [target];
-  if (!target)
-    return;
-  for (let i = 0; i < target.length; i++) {
-    const element = target[i];
-    element.style.cursor = "zoom-in";
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      const url = element.getAttribute(source);
-      if (url)
-        Zoomtastic.show(url);
-    });
-  }
+n.listen = function(i = "[zoomtastic]", e = "src") {
+  if (l || n.mount(), typeof i == "string" && (i = document.querySelectorAll(i)), i instanceof HTMLElement && (i = [i]), !!i)
+    for (let o = 0; o < i.length; o++) {
+      const s = i[o];
+      s.style.cursor = "zoom-in", s.addEventListener("click", (m) => {
+        m.preventDefault();
+        const d = s.getAttribute(e);
+        d && n.show(d);
+      });
+    }
 };
-Zoomtastic.show = function(url) {
-  if (!url)
+n.show = function(i) {
+  if (!i)
     throw new TypeError("URL is not specified");
-  if (!mounted)
-    Zoomtastic.mount();
-  image.style.backgroundImage = `url("${encodeURI(url)}")`;
-  container.style.visibility = "visible";
-  setTimeout(() => {
-    if (Zoomtastic.config.animation === "slide")
-      image.style.transform = "translateY(0) scale(1)";
-    if (Zoomtastic.config.animation === "zoom" || Zoomtastic.config.animation === "drop")
-      image.style.transform = "translateY(0) scale(1)";
-    image.style.opacity = "1";
-    background.style.opacity = "1";
-    locked = false;
+  l || n.mount(), t.style.backgroundImage = `url("${encodeURI(i)}")`, a.style.visibility = "visible", setTimeout(() => {
+    n.config.animation === "slide" && (t.style.transform = "translateY(0) scale(1)"), (n.config.animation === "zoom" || n.config.animation === "drop") && (t.style.transform = "translateY(0) scale(1)"), t.style.opacity = "1", c.style.opacity = "1", r = !1;
   });
 };
-Zoomtastic.hide = function() {
-  if (!mounted)
-    Zoomtastic.mount();
-  setTimeout(() => {
-    if (Zoomtastic.config.animation === "slide")
-      image.style.transform = "translateY(5%) scale(1)";
-    if (Zoomtastic.config.animation === "zoom")
-      image.style.transform = "translateY(0) scale(0.95)";
-    if (Zoomtastic.config.animation === "drop")
-      image.style.transform = "translateY(0) scale(1.1)";
-    image.style.opacity = "0";
-    background.style.opacity = "0";
-  });
-  setTimeout(() => {
-    image.style.backgroundImage = "none";
-    container.style.visibility = "hidden";
-    locked = false;
-  }, parseInt(Zoomtastic.config.duration));
+n.hide = function() {
+  l || n.mount(), setTimeout(() => {
+    n.config.animation === "slide" && (t.style.transform = "translateY(5%) scale(1)"), n.config.animation === "zoom" && (t.style.transform = "translateY(0) scale(0.95)"), n.config.animation === "drop" && (t.style.transform = "translateY(0) scale(1.1)"), t.style.opacity = "0", c.style.opacity = "0";
+  }), setTimeout(() => {
+    t.style.backgroundImage = "none", a.style.visibility = "hidden", r = !1;
+  }, parseInt(n.config.duration));
 };
-function createElement(id, styles = {}) {
-  const element = document.createElement("div");
-  for (const key in styles)
-    element.style[key] = styles[key];
-  element.id = id;
-  return element;
+function f(i, e = {}) {
+  const o = document.createElement("div");
+  for (const s in e)
+    o.style[s] = e[s];
+  return o.id = i, o;
 }
-export { Zoomtastic as default };
+export {
+  n as default
+};
 //# sourceMappingURL=zoomtastic.es.js.map
