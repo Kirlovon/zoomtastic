@@ -35,7 +35,7 @@ npm install zoomtastic --save
 or via [CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/zoomtastic@2.3.1"></script>
+<script src="https://unpkg.com/zoomtastic@2.3.2"></script>
 ```
 
 <br>

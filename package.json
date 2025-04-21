@@ -1,6 +1,6 @@
 {
 	"name": "zoomtastic",
-	"version": "2.3.1",
+	"version": "2.3.2",
 	"description": "Tiny image viewer for web!",
 	"repository": "https://github.com/Kirlovon/zoomtastic.git",
 	"homepage": "https://github.com/Kirlovon/zoomtastic",
@@ -15,8 +15,12 @@
 		"vite"
 	],
 	"license": "MIT",
+	"exports": {
+		"types": "./dist/zoomtastic.d.ts",
+		"import": "./dist/zoomtastic.es.js",
+		"require": "./dist/zoomtastic.umd.js"
+	},
 	"main": "./dist/zoomtastic.umd.js",
-	"exports": "./dist/zoomtastic.umd.js",
 	"types": "./dist/zoomtastic.d.ts",
 	"module": "./dist/zoomtastic.es.js",
 	"scripts": {
@@ -33,6 +37,6 @@
 		"eslint": "^8.48.0",
 		"npm-run-all": "^4.1.5",
 		"typescript": "^5.2.2",
-		"vite": "^4.4.9"
+		"vite": "^6.3.2"
 	}
 }

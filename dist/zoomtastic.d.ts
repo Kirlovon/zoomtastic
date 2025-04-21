@@ -26,7 +26,7 @@ export type ZoomtasticConfig = {
     /**
      * Animation type.
      */
-    animation?: 'slide' | 'fade' | 'zoom' | 'drop';
+    animation?: "slide" | "fade" | "zoom" | "drop";
 };
 declare namespace Zoomtastic {
     /**
